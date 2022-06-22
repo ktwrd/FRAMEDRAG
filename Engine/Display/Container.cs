@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -122,16 +123,44 @@ namespace FRAMEDRAG.Engine.Display
                 child.UpdateTransform();
             }
         }
-        public static DisplayObject[] GetChildrenTree(Container container)
+        public static DisplayObject[] GetChildrenTree(Container container, bool? notRoot)
         {
             var childs = new List<DisplayObject>();
             foreach (var child in container.Children)
             {
                 childs.Add(child);
                 if (child.GetType().IsAssignableFrom(typeof(Container)))
-                    childs.Concat(GetChildrenTree((Container)child));
+                    childs.Concat(GetChildrenTree((Container)child, true));
+            }
+
+
+            if ((bool)!notRoot)
+            {
+                SortedDictionary<int, List<DisplayObject>> dlk = new();
+                var sortedChilds = new List<DisplayObject>();
+                foreach (var c in childs)
+                {
+                    if (!dlk.ContainsKey(c.ZIndex))
+                        dlk.Add(c.ZIndex, new List<DisplayObject>());
+                    dlk[c.ZIndex].Add(c);
+                }
+
+                foreach (var pair in dlk)
+                {
+                    sortedChilds = new List<DisplayObject>(sortedChilds.Concat(pair.Value));
+                }
+
+                childs = sortedChilds;
             }
             return childs.ToArray();
+        }
+        public override void Draw(SpriteBatch spriteBatch, EngineGame engine)
+        {
+            foreach (var child in Children)
+            {
+                child.Draw(spriteBatch, engine);
+            }
+            base.Draw(spriteBatch, engine);
         }
 
     }
