@@ -117,9 +117,14 @@ namespace FRAMEDRAG.Engine
                 fixedUpdateTimer -= FixedUpdateTime;
             }
         }
-        protected void FixedUpdate(GameTime gameTime)
+        protected virtual void FixedUpdate(GameTime gameTime)
         {
             WalkedObjects = new List<DisplayObject>(Container.GetChildrenTree(Stage, false));
+
+            foreach (var comp in Components)
+            {
+                ((Engine.Component)comp).FixedUpdate(gameTime);
+            }
         }
         // FixedFastUpdate related
         private double fixedfastUpdateTimer = 0;
