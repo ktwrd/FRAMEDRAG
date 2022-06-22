@@ -20,23 +20,36 @@ namespace Engine
         public double TargetFramerate = 1000f;
         public float MouseSensitivity = 6f;
 
-        public Dictionary<string, object> AssetTable;
+        public Dictionary<string, Texture2D> TextureCache;
 
         public Stage Stage;
 
         public EngineGame()
         {
-            graphicsDevice = new GraphicsDeviceManager(this);
+            TextureCache = new Dictionary<string, Texture2D>();
 
-            graphicsDevice.PreferredBackBufferHeight = 720;
-            graphicsDevice.PreferredBackBufferWidth = 1280;
-            graphicsDevice.HardwareModeSwitch = false;
-            graphicsDevice.GraphicsProfile = GraphicsProfile.HiDef;
-            graphicsDevice.SynchronizeWithVerticalRetrace = true;
+            graphicsDevice = new GraphicsDeviceManager(this);
+        }
+
+        public void LoadImage(string location)
+        {
+            var key = Path.GetFileNameWithoutExtension(location);
+            if (TextureCache.ContainsKey(key))
+                return;
+            var stream = new FileStream(location, FileMode.Open);
+            var tex = Texture2D.FromStream(GraphicsDevice, stream);
+            TextureCache.Add(key.ToLower(), tex);
         }
 
         protected override void Initialize()
         {
+            graphicsDevice.PreferredBackBufferHeight = 1080;
+            graphicsDevice.PreferredBackBufferWidth = 1920;
+            graphicsDevice.HardwareModeSwitch = true;
+            graphicsDevice.GraphicsProfile = GraphicsProfile.HiDef;
+            graphicsDevice.SynchronizeWithVerticalRetrace = true;
+            graphicsDevice.ApplyChanges();
+
             IsFixedTimeStep = true;
             TargetElapsedTime = TimeSpan.FromSeconds(1f / TargetFramerate);
 
