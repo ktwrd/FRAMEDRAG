@@ -61,17 +61,33 @@ namespace Engine
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            LoadImage(@"C:\Users\jyles\Pictures\ohno.jpg");
+            LoadImage(@"C:\Users\jyles\Pictures\tenor.gif");
+            var testTexture = new Textures.Texture(TextureCache[@"tenor"]);
+            var testSprite = new DVDSprite(testTexture);
+
+            Stage.AddChild(testSprite);
+
             base.LoadContent();
         }
         protected override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
-
             checkFixedUpdate(gameTime);
             checkFixedFastUpdate(gameTime);
+
+            base.Update(gameTime);
         }
+        private List<DisplayObject> WalkedObjects = new List<DisplayObject>();
         protected override void Draw(GameTime gameTime)
         {
+            GraphicsDevice.Clear(Color.Black);
+
+            spriteBatch.Begin();
+            foreach (var displayObject in WalkedObjects)
+            {
+                displayObject.Draw(spriteBatch, this);
+            }
+            spriteBatch.End();
             base.Draw(gameTime);
         }
 
@@ -79,6 +95,7 @@ namespace Engine
         private double fixedUpdateTimer = 0;
         private void checkFixedUpdate(GameTime gameTime)
         {
+            fixedUpdateTimer += gameTime.ElapsedGameTime.TotalSeconds;
             while (fixedUpdateTimer >= FixedUpdateTime)
             {
                 FixedUpdate(gameTime);
@@ -86,11 +103,14 @@ namespace Engine
             }
         }
         protected void FixedUpdate(GameTime gameTime)
-        { }
+        {
+            WalkedObjects = new List<DisplayObject>(Container.GetChildrenTree(Stage));
+        }
         // FixedFastUpdate related
         private double fixedfastUpdateTimer = 0;
         private void checkFixedFastUpdate(GameTime gameTime)
         {
+            fixedfastUpdateTimer += gameTime.ElapsedGameTime.TotalSeconds;
             while (fixedfastUpdateTimer >= FixedFastUpdateTime)
             {
                 FixedFastUpdate(gameTime);
@@ -98,6 +118,11 @@ namespace Engine
             }
         }
         protected void FixedFastUpdate(GameTime gameTime)
-        { }
+        {
+            foreach (var displayObject in WalkedObjects)
+            {
+                displayObject.Update(gameTime, this);
+            }
+        }
     }
 }
