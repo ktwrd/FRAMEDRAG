@@ -72,6 +72,8 @@ namespace FRAMEDRAG.Engine
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            Components.Add(new CursorOverlay(this));
+
             base.LoadContent();
         }
         protected override void Update(GameTime gameTime)
@@ -86,11 +88,8 @@ namespace FRAMEDRAG.Engine
         {
             GraphicsDevice.Clear(Color.Black);
 
-            spriteBatch.Begin();
-            foreach (var displayObject in WalkedObjects)
-            {
-                displayObject.Draw(spriteBatch, this);
-            }
+            spriteBatch.Begin(SpriteSortMode.FrontToBack);
+            Stage.Draw(spriteBatch, this);
             spriteBatch.End();
             base.Draw(gameTime);
         }
@@ -108,7 +107,7 @@ namespace FRAMEDRAG.Engine
         }
         protected void FixedUpdate(GameTime gameTime)
         {
-            WalkedObjects = new List<DisplayObject>(Container.GetChildrenTree(Stage));
+            WalkedObjects = new List<DisplayObject>(Container.GetChildrenTree(Stage, false));
         }
         // FixedFastUpdate related
         private double fixedfastUpdateTimer = 0;
