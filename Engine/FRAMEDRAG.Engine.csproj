@@ -8,6 +8,82 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="BuiltinAssets\cursor\based_arrow_down.png" />
+    <None Remove="BuiltinAssets\cursor\based_arrow_up.png" />
+    <None Remove="BuiltinAssets\cursor\bottom_left_corner.png" />
+    <None Remove="BuiltinAssets\cursor\bottom_right_corner.png" />
+    <None Remove="BuiltinAssets\cursor\cell.png" />
+    <None Remove="BuiltinAssets\cursor\context-menu.png" />
+    <None Remove="BuiltinAssets\cursor\crossed_circle.png" />
+    <None Remove="BuiltinAssets\cursor\dotbox.png" />
+    <None Remove="BuiltinAssets\cursor\fleur.png" />
+    <None Remove="BuiltinAssets\cursor\grabbing.png" />
+    <None Remove="BuiltinAssets\cursor\hand2.png" />
+    <None Remove="BuiltinAssets\cursor\left_ptr.png" />
+    <None Remove="BuiltinAssets\cursor\pencil.png" />
+    <None Remove="BuiltinAssets\cursor\plus.png" />
+    <None Remove="BuiltinAssets\cursor\question_arrow.png" />
+    <None Remove="BuiltinAssets\cursor\right_ptr.png" />
+    <None Remove="BuiltinAssets\cursor\sb_down_arrow.png" />
+    <None Remove="BuiltinAssets\cursor\sb_h_double_arrow.png" />
+    <None Remove="BuiltinAssets\cursor\sb_left_arrow.png" />
+    <None Remove="BuiltinAssets\cursor\sb_right_arrow.png" />
+    <None Remove="BuiltinAssets\cursor\sb_up_arrow.png" />
+    <None Remove="BuiltinAssets\cursor\sb_v_double_arrow.png" />
+    <None Remove="BuiltinAssets\cursor\sizing.png" />
+    <None Remove="BuiltinAssets\cursor\top_left_corner.png" />
+    <None Remove="BuiltinAssets\cursor\top_right_corner.png" />
+    <None Remove="BuiltinAssets\cursor\watch1.png" />
+    <None Remove="BuiltinAssets\cursor\watch2.png" />
+    <None Remove="BuiltinAssets\cursor\watch3.png" />
+    <None Remove="BuiltinAssets\cursor\watch4.png" />
+    <None Remove="BuiltinAssets\cursor\watch5.png" />
+    <None Remove="BuiltinAssets\cursor\watch6.png" />
+    <None Remove="BuiltinAssets\cursor\xterm.png" />
+    <None Remove="BuiltinAssets\cursor\X_cursor.png" />
+    <None Remove="BuiltinAssets\cursor\zoom-in.png" />
+    <None Remove="BuiltinAssets\cursor\zoom-out.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="BuiltinAssets\cursor\based_arrow_down.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\based_arrow_up.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\bottom_left_corner.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\bottom_right_corner.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\cell.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\context-menu.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\crossed_circle.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\dotbox.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\fleur.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\grabbing.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\hand2.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\left_ptr.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\pencil.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\plus.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\question_arrow.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\right_ptr.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\sb_down_arrow.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\sb_h_double_arrow.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\sb_left_arrow.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\sb_right_arrow.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\sb_up_arrow.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\sb_v_double_arrow.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\sizing.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\top_left_corner.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\top_right_corner.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\watch1.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\watch2.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\watch3.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\watch4.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\watch5.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\watch6.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\xterm.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\X_cursor.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\zoom-in.png" />
+    <EmbeddedResource Include="BuiltinAssets\cursor\zoom-out.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.0.1641" />
   </ItemGroup>
 
