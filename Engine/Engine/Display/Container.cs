@@ -39,8 +39,8 @@ namespace Engine.Display
 
             var childFirst = child.First;
             var childLast = child.Last;
-            DisplayObject previousObject = Last;
-            DisplayObject nextObject = previousObject._iNext;
+            DisplayObject? previousObject = Last;
+            DisplayObject? nextObject = previousObject?._iNext;
 
             var updateLast = this;
             var prevLast = previousObject;
@@ -57,9 +57,10 @@ namespace Engine.Display
                 nextObject._iPrev = childLast;
                 childLast._iNext = nextObject;
             }
-
-            childFirst._iPrev = previousObject;
-            previousObject._iNext = childFirst;
+            if (childFirst != null)
+                childFirst._iPrev = previousObject;
+            if (previousObject != null)
+                previousObject._iNext = childFirst;
         }
         public void RemoveChild(DisplayObject child)
         {
