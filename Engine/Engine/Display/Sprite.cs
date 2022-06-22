@@ -45,5 +45,18 @@ namespace Engine.Display
                 height = value;
             }
         }
+
+        public override void Draw(SpriteBatch spriteBatch, EngineGame engine)
+        {
+            var rect = new Rectangle(
+                    Convert.ToInt32(Position.X),
+                    Convert.ToInt32(Position.Y),
+                    Convert.ToInt32(Width),
+                    Convert.ToInt32(Height));
+            spriteBatch.Draw(
+                Texture.BaseTexture,
+                rect,
+                Color.White);
+        }
     }
 }
