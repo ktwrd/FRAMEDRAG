@@ -6,7 +6,8 @@ namespace Engine
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine(@"cunt");
+            var game = new EngineGame();
+            game.Run();
         }
     }
 }

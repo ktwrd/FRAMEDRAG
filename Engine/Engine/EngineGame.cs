@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Engine.Display;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,8 @@ namespace Engine
 
         public Dictionary<string, object> AssetTable;
 
+        public Stage Stage;
+
         public EngineGame()
         {
             graphicsDevice = new GraphicsDeviceManager(this);
@@ -36,6 +39,8 @@ namespace Engine
         {
             IsFixedTimeStep = true;
             TargetElapsedTime = TimeSpan.FromSeconds(1f / TargetFramerate);
+
+            Stage = new Stage(this);
 
             base.Initialize();
         }
