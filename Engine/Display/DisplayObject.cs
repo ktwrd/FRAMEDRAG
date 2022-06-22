@@ -29,6 +29,7 @@ namespace FRAMEDRAG.Engine.Display
         public Stage Stage;
         public float WorldAlpha = 1;
         public bool _interactive = false;
+        public int ZIndex = 0;
         public bool Interactive
         {
             get
