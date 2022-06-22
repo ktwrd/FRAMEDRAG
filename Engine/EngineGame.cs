@@ -87,6 +87,12 @@ namespace FRAMEDRAG.Engine
             checkFixedUpdate(gameTime);
             checkFixedFastUpdate(gameTime);
 
+
+            foreach (var comp in Components)
+            {
+                ((Engine.Component)comp).Update(gameTime);
+            }
+
             base.Update(gameTime);
         }
         private List<DisplayObject> WalkedObjects = new List<DisplayObject>();
