@@ -37,6 +37,7 @@ namespace FRAMEDRAG.DVDExample
             countText.Position.X = 300;
             countText.ZIndex = int.MaxValue;
             Stage.AddChild(countText);
+
         }
         private Text countText;
         private int spritecount = 0;
