@@ -122,6 +122,17 @@ namespace Engine.Display
                 child.UpdateTransform();
             }
         }
+        public static DisplayObject[] GetChildrenTree(Container container)
+        {
+            var childs = new List<DisplayObject>();
+            foreach (var child in container.Children)
+            {
+                childs.Add(child);
+                if (child.GetType().IsAssignableFrom(typeof(Container)))
+                    childs.Concat(GetChildrenTree((Container)child));
+            }
+            return childs.ToArray();
+        }
 
     }
 }
