@@ -21,7 +21,7 @@ namespace FRAMEDRAG.Engine
         public double FixedUpdateTime = 1f / 15f;
         public double FixedFastUpdateTime = 1f / 500f;
 
-        public double TargetFramerate = 1000f;
+        public double TargetFramerate = 1000000f;
         public float MouseSensitivity = 6f;
 
         public Dictionary<string, Texture2D> TextureCache;
@@ -61,7 +61,7 @@ namespace FRAMEDRAG.Engine
             graphicsDevice.SynchronizeWithVerticalRetrace = true;
             UpdateWindowSize();
 
-            IsFixedTimeStep = true;
+            IsFixedTimeStep = false;
             TargetElapsedTime = TimeSpan.FromSeconds(1f / TargetFramerate);
 
             Stage = new Stage(this);
