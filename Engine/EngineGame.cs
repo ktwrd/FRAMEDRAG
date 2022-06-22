@@ -137,11 +137,15 @@ namespace FRAMEDRAG.Engine
                 fixedfastUpdateTimer -= FixedFastUpdateTime;
             }
         }
-        protected void FixedFastUpdate(GameTime gameTime)
+        protected virtual void FixedFastUpdate(GameTime gameTime)
         {
             foreach (var displayObject in WalkedObjects)
             {
                 displayObject.Update(gameTime, this);
+            }
+            foreach (var comp in Components)
+            {
+                ((Engine.Component)comp).FixedFastUpdate(gameTime);
             }
         }
     }
