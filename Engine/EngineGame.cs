@@ -31,6 +31,9 @@ namespace FRAMEDRAG.Engine
             graphicsDevice = new GraphicsDeviceManager(this);
         }
 
+        public int WindowWidth = 1600;
+        public int WindowHeight = 900;
+
         public void LoadImage(string location)
         {
             var key = Path.GetFileNameWithoutExtension(location);
@@ -43,12 +46,10 @@ namespace FRAMEDRAG.Engine
 
         protected override void Initialize()
         {
-            graphicsDevice.PreferredBackBufferHeight = 1080;
-            graphicsDevice.PreferredBackBufferWidth = 1920;
             graphicsDevice.HardwareModeSwitch = true;
             graphicsDevice.GraphicsProfile = GraphicsProfile.HiDef;
             graphicsDevice.SynchronizeWithVerticalRetrace = true;
-            graphicsDevice.ApplyChanges();
+            UpdateWindowSize();
 
             IsFixedTimeStep = true;
             TargetElapsedTime = TimeSpan.FromSeconds(1f / TargetFramerate);
@@ -56,6 +57,16 @@ namespace FRAMEDRAG.Engine
             Stage = new Stage(this);
 
             base.Initialize();
+        }
+        public void UpdateWindowSize()
+        {
+            UpdateWindowSize(WindowWidth, WindowHeight);
+        }
+        public void UpdateWindowSize(int width, int height)
+        {
+            graphicsDevice.PreferredBackBufferWidth = width;
+            graphicsDevice.PreferredBackBufferHeight = height;
+            graphicsDevice.ApplyChanges();
         }
         protected override void LoadContent()
         {
