@@ -1,9 +1,11 @@
 ﻿using FRAMEDRAG.Engine.Display;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using SpriteFontPlus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,10 +13,12 @@ namespace FRAMEDRAG.Engine
 {
     public class EngineGame : Game
     {
+        public SpriteFont DefaultFont;
+
         public GraphicsDeviceManager graphicsDevice;
         public SpriteBatch spriteBatch;
 
-        public double FixedUpdateTime = 1f / 30f;
+        public double FixedUpdateTime = 1f / 15f;
         public double FixedFastUpdateTime = 1f / 500f;
 
         public double TargetFramerate = 1000f;
@@ -76,9 +80,18 @@ namespace FRAMEDRAG.Engine
         }
         protected override void LoadContent()
         {
+            var fontstream = streamToByteArray(Assembly.GetAssembly(typeof(EngineCursor)).GetManifestResourceStream(@"FRAMEDRAG.Engine.BuiltinAssets.font.ttf"));
+            var baked = TtfFontBaker.Bake(
+                fontstream,
+                16,
+                460,
+                90,
+                new[] { CharacterRange.BasicLatin });
+            DefaultFont = baked.CreateSpriteFont(GraphicsDevice);
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             Components.Add(new CursorOverlay(this));
+            Components.Add(new StatsOverlay(this));
 
             base.LoadContent();
         }
