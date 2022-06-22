@@ -10,11 +10,9 @@ namespace Engine.Textures
 {
     public class Texture
     {
-        public Texture(Texture2D texture, Rectangle? f)
+        public Texture(Texture2D texture)
         {
             Rectangle frame = new Rectangle(0, 0, 1, 1);
-            if (f != null)
-                frame = (Rectangle)(f);
             BaseTexture = texture;
 
             if (noFrame)
