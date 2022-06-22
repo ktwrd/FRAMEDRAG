@@ -56,7 +56,12 @@ namespace FRAMEDRAG.Engine.Display
             spriteBatch.Draw(
                 Texture.BaseTexture,
                 rect,
-                Color.White);
+                null,
+                Color.White,
+                0f,
+                Vector2.Zero,
+                SpriteEffects.None,
+                Convert.ToSingle(ZIndex/int.MaxValue));
         }
     }
 }
