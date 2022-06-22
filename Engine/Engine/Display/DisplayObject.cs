@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -117,5 +118,10 @@ namespace Engine.Display
 
         internal DisplayObject _iNext;
         internal DisplayObject _iPrev;
+
+        public virtual void Draw(SpriteBatch spriteBatch, EngineGame engine)
+        { }
+        public virtual void Update(GameTime gameTime, EngineGame engine)
+        { }
     }
 }
