@@ -34,10 +34,15 @@ namespace Engine
 
         protected override void Initialize()
         {
+            IsFixedTimeStep = true;
+            TargetElapsedTime = TimeSpan.FromSeconds(1f / TargetFramerate);
+
             base.Initialize();
         }
         protected override void LoadContent()
         {
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+
             base.LoadContent();
         }
         protected override void Update(GameTime gameTime)
@@ -45,6 +50,7 @@ namespace Engine
             base.Update(gameTime);
 
             checkFixedUpdate(gameTime);
+            checkFixedFastUpdate(gameTime);
         }
         protected override void Draw(GameTime gameTime)
         {
