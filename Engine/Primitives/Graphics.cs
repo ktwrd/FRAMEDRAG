@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Engine.Display;
+using FRAMEDRAG.Engine.Display;
 using Microsoft.Xna.Framework;
 
-namespace Engine.Primitives
+namespace FRAMEDRAG.Engine.Primitives
 {
     public class GraphicsPath
     {

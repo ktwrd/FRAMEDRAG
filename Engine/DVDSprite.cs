@@ -1,5 +1,5 @@
-﻿using Engine.Display;
-using Engine.Textures;
+﻿using FRAMEDRAG.Engine.Display;
+using FRAMEDRAG.Engine.Textures;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Engine
+namespace FRAMEDRAG.Engine
 {
     internal class DVDSprite : Sprite
     {

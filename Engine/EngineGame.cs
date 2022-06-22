@@ -1,4 +1,4 @@
-﻿using Engine.Display;
+﻿using FRAMEDRAG.Engine.Display;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Engine
+namespace FRAMEDRAG.Engine
 {
     public class EngineGame : Game
     {
@@ -60,13 +60,6 @@ namespace Engine
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            LoadImage(@"C:\Users\jyles\Pictures\ohno.jpg");
-            LoadImage(@"C:\Users\jyles\Pictures\tenor.gif");
-            var testTexture = new Textures.Texture(TextureCache[@"tenor"]);
-            var testSprite = new DVDSprite(testTexture);
-
-            Stage.AddChild(testSprite);
 
             base.LoadContent();
         }

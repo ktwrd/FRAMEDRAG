@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Engine.Display
+namespace FRAMEDRAG.Engine.Display
 {
     public class Stage : Container
     {
