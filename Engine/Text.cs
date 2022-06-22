@@ -49,7 +49,7 @@ namespace FRAMEDRAG.Engine
                     maxLineSize.Y = lineWidth.Y;
             }
             Size = new Vector2(
-                lineWidths.Sum(),
+                maxLineSize.X,
                 lineHeights.Sum()
             );
 
@@ -59,15 +59,31 @@ namespace FRAMEDRAG.Engine
         }
 
         public Color FontColor = Color.White;
+        public Texture2D BlankTexture = null;
         public override void Draw(SpriteBatch spriteBatch, EngineGame engine)
         {
+            if (BlankTexture == null)
+            {
+                var t = new Texture2D(engine.GraphicsDevice, 1, 1);
+                t.SetData(new Color[] { Color.White });
+                BlankTexture = t;
+            }
             var offset = Vector2.Zero;
             for (int i = 0; i < lines.Length; i++)
             {
                 string line = lines[i];
                 var pos = Position + offset;
-                spriteBatch.DrawString(engine.DefaultFont, line, pos, FontColor);
-                offset += new Vector2(lineWidth[i], lineHeight[i]);
+                spriteBatch.DrawString(
+                    engine.DefaultFont,
+                    line,
+                    pos,
+                    FontColor,
+                    0f,
+                    Vector2.Zero,
+                    1f,
+                    SpriteEffects.None,
+                    Convert.ToSingle(ZIndex / int.MaxValue));
+                offset += new Vector2(0, lineHeight[i]);
             }
         }
     }
