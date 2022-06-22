@@ -24,6 +24,12 @@ namespace FRAMEDRAG.Engine
 
         public Stage Stage;
 
+        public static byte[] streamToByteArray(Stream input)
+        {
+            MemoryStream ms = new MemoryStream();
+            input.CopyTo(ms);
+            return ms.ToArray();
+        }
         public EngineGame()
         {
             TextureCache = new Dictionary<string, Texture2D>();
