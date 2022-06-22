@@ -1,0 +1,74 @@
+﻿using FRAMEDRAG.Engine.Display;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+
+namespace FRAMEDRAG.Engine
+{
+    public class Text : Container
+    {
+        public Text(string text, SpriteFont font)
+            : base()
+        {
+            TextContent = text;
+            Font = font;
+        }
+
+        private string TextContent = @"";
+        public void SetText(string content)
+        {
+            TextContent = content;
+            UpdateText();
+        }
+
+        private string[] lines = Array.Empty<string>();
+        private int[] lineHeight = Array.Empty<int>();
+        private int[] lineWidth = Array.Empty<int>();
+        public SpriteFont Font;
+        public Vector2 Size = Vector2.Zero;
+        public void UpdateText()
+        {
+            var lines = Regex.Split(TextContent, @"(?:\r\n|\r|\n)");
+
+            var lineWidths = new List<int>();
+            var lineHeights = new List<int>();
+            var maxLineSize = Vector2.Zero;
+            foreach (var line in lines)
+            {
+                var lineWidth = Font.MeasureString(line);
+                lineWidths.Add(Convert.ToInt32(lineWidth.X));
+                lineHeights.Add(Convert.ToInt32(lineWidth.Y));
+                if (lineWidth.X > maxLineSize.X)
+                    maxLineSize.X = lineWidth.X;
+                if (lineWidth.Y > maxLineSize.Y)
+                    maxLineSize.Y = lineWidth.Y;
+            }
+            Size = new Vector2(
+                lineWidths.Sum(),
+                lineHeights.Sum()
+            );
+
+            lineHeight = lineHeights.ToArray();
+            lineWidth = lineWidths.ToArray();
+            this.lines = lines;
+        }
+
+        public Color FontColor = Color.White;
+        public override void Draw(SpriteBatch spriteBatch, EngineGame engine)
+        {
+            var offset = Vector2.Zero;
+            for (int i = 0; i < lines.Length; i++)
+            {
+                string line = lines[i];
+                var pos = Position + offset;
+                spriteBatch.DrawString(engine.DefaultFont, line, pos, FontColor);
+                offset += new Vector2(lineWidth[i], lineHeight[i]);
+            }
+        }
+    }
+}
