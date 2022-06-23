@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +9,21 @@ using System.Threading.Tasks;
 
 namespace FRAMEDRAG.Engine.Display
 {
+    public enum MouseButton
+    {
+        Left,
+        Middle,
+        Right
+    }
     public class Container : DisplayObject
     {
         public List<DisplayObject> Children = new List<DisplayObject>();
+
+        public Rectangle Bounds { get; private set; }
+        public virtual void UpdateBounds()
+        {
+
+        }
 
         public DisplayObject GetChildAt(int index)
         {
@@ -162,6 +176,37 @@ namespace FRAMEDRAG.Engine.Display
             }
             base.Draw(spriteBatch, engine);
         }
+        protected bool IsCursorInteracting = false;
+        private MouseState? previousMouseState = null;
+        public virtual void InteractiveCheck(GameTime gameTime, MouseState mouse, KeyboardState keyboard)
+        {
+            if (mouse.X > Bounds.X && mouse.X < Bounds.X + Bounds.Width)
+                if (mouse.Y > Bounds.Y && mouse.Y < Bounds.Y + Bounds.Height)
+                {
+                    IsCursorInteracting = true;
+                    if (mouse.LeftButton == ButtonState.Pressed || mouse.MiddleButton == ButtonState.Pressed || mouse.RightButton == ButtonState.Pressed)
+                        MouseDown(mouse, keyboard);
+                    if (previousMouseState != null)
+                    {
+                        if (mouse.LeftButton == ButtonState.Released && previousMouseState?.LeftButton == ButtonState.Pressed)
+                            MouseUp(MouseButton.Left, (MouseState)previousMouseState, mouse);
+                        if (mouse.RightButton == ButtonState.Released && previousMouseState?.RightButton == ButtonState.Pressed)
+                            MouseUp(MouseButton.Right, (MouseState)previousMouseState, mouse);
+                        if (mouse.MiddleButton == ButtonState.Released && previousMouseState?.MiddleButton == ButtonState.Pressed)
+                            MouseUp(MouseButton.Middle, (MouseState)previousMouseState, mouse);
+                    }
+                    MouseHover(mouse, keyboard);
+                    previousMouseState = mouse;
+                    return;
+                }
+            IsCursorInteracting = false;
+        }
 
+        protected virtual void MouseDown(MouseState mouse, KeyboardState keyboard)
+        { }
+        protected virtual void MouseUp(MouseButton button, MouseState previous, MouseState current)
+        { }
+        protected virtual void MouseHover(MouseState mouse, KeyboardState keyboard)
+        { }
     }
 }
