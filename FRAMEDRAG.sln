@@ -5,7 +5,9 @@ VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FRAMEDRAG.Engine", "Engine\FRAMEDRAG.Engine.csproj", "{79021020-3885-4BF1-9940-1EEAB4D90378}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FRAMEDRAG.DVDExample", "FRAMEDRAG.DVDExample\FRAMEDRAG.DVDExample.csproj", "{8523271F-3059-4B9F-829C-7A1C7292B3B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FRAMEDRAG.DVDExample", "FRAMEDRAG.DVDExample\FRAMEDRAG.DVDExample.csproj", "{8523271F-3059-4B9F-829C-7A1C7292B3B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FRAMEDRAG.UIExample", "FRAMEDRAG.UIExample\FRAMEDRAG.UIExample.csproj", "{EB2BD70A-EDF1-422A-B641-2047D49E91AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{8523271F-3059-4B9F-829C-7A1C7292B3B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8523271F-3059-4B9F-829C-7A1C7292B3B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8523271F-3059-4B9F-829C-7A1C7292B3B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB2BD70A-EDF1-422A-B641-2047D49E91AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB2BD70A-EDF1-422A-B641-2047D49E91AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB2BD70A-EDF1-422A-B641-2047D49E91AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB2BD70A-EDF1-422A-B641-2047D49E91AB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
