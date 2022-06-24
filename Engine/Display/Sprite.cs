@@ -37,7 +37,7 @@ namespace FRAMEDRAG.Engine.Display
                     rect = LocalBoundsRect;
                 }
             }
-            return base.getLocalBounds(rect);
+            return base.GetLocalBounds(rect);
         }
 
         public bool UpdateFrame = false;
