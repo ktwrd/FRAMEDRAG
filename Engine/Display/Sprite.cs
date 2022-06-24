@@ -87,6 +87,7 @@ namespace FRAMEDRAG.Engine.Display
                 Vector2.Zero,
                 SpriteEffects.None,
                 Convert.ToSingle(ZIndex/int.MaxValue));
+            base.Draw(spriteBatch, engine);
         }
     }
 }
