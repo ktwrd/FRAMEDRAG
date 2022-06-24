@@ -96,6 +96,7 @@ namespace FRAMEDRAG.Engine
             var mouseState = Mouse.GetState();
             Current.Sprite.Position.X = mouseState.X;
             Current.Sprite.Position.Y = mouseState.Y;
+            base.Update(gameTime);
         }
     }
 }
