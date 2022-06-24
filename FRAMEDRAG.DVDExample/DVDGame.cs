@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using FRAMEDRAG.Engine;
+using FRAMEDRAG.Engine.Display;
 using FRAMEDRAG.Engine.Textures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -29,15 +30,23 @@ namespace FRAMEDRAG.DVDExample
             }
             AddSpriteThing();
         }
+        public Stream GetStream(string location)
+        {
+            return File.OpenRead(location);
+        }
         protected override void LoadContent()
         {
-            base.LoadContent();
 
             countText = new Text($@"Count: {spritecount}", DefaultFont);
             countText.Position.X = 300;
             countText.ZIndex = int.MaxValue;
             Stage.AddChild(countText);
 
+
+            var gif = AnimatedSprite.GIFFromStream(GetStream(@"C:\Work\Gamedev\FrameDrag\FRAMEDRAG.DVDExample\gif-resized.gif"), this);
+            Stage.AddChild(gif);
+
+            base.LoadContent();
         }
         private Text countText;
         private int spritecount = 0;
