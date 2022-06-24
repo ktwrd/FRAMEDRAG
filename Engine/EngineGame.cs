@@ -1,6 +1,8 @@
 ﻿using FRAMEDRAG.Engine.Display;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using QuakeConsole;
 using SpriteFontPlus;
 using System;
 using System.Collections.Generic;
@@ -11,6 +13,32 @@ using System.Threading.Tasks;
 
 namespace FRAMEDRAG.Engine
 {
+    public class EngineGameAttributes
+    {
+        private EngineGame engine;
+        public EngineGameAttributes(EngineGame engine)
+        {
+            this.engine = engine;
+        }
+        public int showfps = 0;
+
+        public bool fullscreen
+        {
+            get
+            {
+                return engine.graphicsDevice.IsFullScreen;
+            }
+            set
+            {
+                if (value != engine.graphicsDevice.IsFullScreen)
+                    engine.graphicsDevice.ToggleFullScreen();
+            }
+        }
+        public void quit()
+        {
+            Environment.Exit(0);
+        }
+    }
     public class EngineGame : Game
     {
         public SpriteFont DefaultFont;
@@ -24,9 +52,15 @@ namespace FRAMEDRAG.Engine
         public double TargetFramerate = 1000000f;
         public float MouseSensitivity = 6f;
 
+        public ConsoleComponent qConsole;
+        internal DConsole _console;
+
         public Dictionary<string, Texture2D> TextureCache;
 
         public Stage Stage;
+
+        public int ClientShowFPS = 0;
+        public EngineGameAttributes Attributes;
 
         public static byte[] streamToByteArray(Stream input)
         {
@@ -36,9 +70,17 @@ namespace FRAMEDRAG.Engine
         }
         public EngineGame()
         {
+            Attributes = new EngineGameAttributes(this);
             TextureCache = new Dictionary<string, Texture2D>();
 
             graphicsDevice = new GraphicsDeviceManager(this);
+
+            qConsole = new ConsoleComponent(this)
+            {
+                LogInput = cmd => Console.WriteLine(cmd)
+            };
+            Components.Add(qConsole);
+            _console = new DConsole(this);
         }
 
         public int WindowWidth = 1600;
@@ -68,6 +110,7 @@ namespace FRAMEDRAG.Engine
 
             base.Initialize();
         }
+        #region Window Size
         public void UpdateWindowSize()
         {
             UpdateWindowSize(WindowWidth, WindowHeight);
@@ -78,6 +121,7 @@ namespace FRAMEDRAG.Engine
             graphicsDevice.PreferredBackBufferHeight = height;
             graphicsDevice.ApplyChanges();
         }
+        #endregion
         protected override void LoadContent()
         {
             var fontstream = streamToByteArray(Assembly.GetAssembly(typeof(EngineCursor)).GetManifestResourceStream(@"FRAMEDRAG.Engine.BuiltinAssets.font.ttf"));
@@ -95,20 +139,10 @@ namespace FRAMEDRAG.Engine
 
             base.LoadContent();
         }
-        protected override void Update(GameTime gameTime)
-        {
-            checkFixedUpdate(gameTime);
-            checkFixedFastUpdate(gameTime);
-
-
-            foreach (var comp in Components)
-            {
-                ((Engine.Component)comp).Update(gameTime);
-            }
-
-            base.Update(gameTime);
-        }
+        
         private List<DisplayObject> WalkedObjects = new List<DisplayObject>();
+
+        internal KeyboardState? previousKeyboard = null;
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
@@ -118,7 +152,35 @@ namespace FRAMEDRAG.Engine
             spriteBatch.End();
             base.Draw(gameTime);
         }
+        
+        #region Update
+        protected override void Update(GameTime gameTime)
+        {
+            checkFixedUpdate(gameTime);
+            checkFixedFastUpdate(gameTime);
 
+
+            foreach (var comp in Components.OfType<Engine.Component>())
+            {
+                comp.Update(gameTime);
+            }
+
+            var keyboard = Keyboard.GetState();
+            if (previousKeyboard != null)
+            {
+                if ((bool)previousKeyboard?.IsKeyUp(Keys.OemTilde) && keyboard.IsKeyDown(Keys.OemTilde))
+                {
+                    qConsole.ToggleOpenClose();
+                }
+            }
+
+            previousKeyboard = keyboard;
+
+            base.Update(gameTime);
+        }
+        #endregion
+        
+        #region FixedUpdate
         // FixedUpdate related
         private double fixedUpdateTimer = 0;
         private void checkFixedUpdate(GameTime gameTime)
@@ -134,11 +196,14 @@ namespace FRAMEDRAG.Engine
         {
             WalkedObjects = new List<DisplayObject>(Container.GetChildrenTree(Stage, false));
 
-            foreach (var comp in Components)
+            foreach (var comp in Components.OfType<Engine.Component>())
             {
-                ((Engine.Component)comp).FixedUpdate(gameTime);
+                comp.FixedUpdate(gameTime);
             }
         }
+        #endregion
+        
+        #region FixedFastUpdate
         // FixedFastUpdate related
         private double fixedfastUpdateTimer = 0;
         private void checkFixedFastUpdate(GameTime gameTime)
@@ -156,10 +221,11 @@ namespace FRAMEDRAG.Engine
             {
                 displayObject.Update(gameTime, this);
             }
-            foreach (var comp in Components)
+            foreach (var comp in Components.OfType<Engine.Component>())
             {
-                ((Engine.Component)comp).FixedFastUpdate(gameTime);
+                comp.FixedFastUpdate(gameTime);
             }
         }
+        #endregion
     }
 }

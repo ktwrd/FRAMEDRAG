@@ -16,10 +16,11 @@ namespace FRAMEDRAG.Engine
         public StatsOverlay(EngineGame engine)
             : base(engine)
         {
+            this.engine = engine;
             TextOverlay = new Text(@"", engine.DefaultFont);
             TextOverlay.Position = Vector2.Zero;
-            engine.Stage.AddChild(TextOverlay);
         }
+        private EngineGame engine;
 
         public Text TextOverlay;
 
@@ -28,6 +29,7 @@ namespace FRAMEDRAG.Engine
         public double FPS_Min = double.MaxValue;
         public override void Update(GameTime gameTime)
         {
+            if (engine.Attributes.showfps < 1) return;
             FPS = 1000.0f / gameTime.ElapsedGameTime.TotalMilliseconds;
             if (FPS == double.PositiveInfinity || FPS == double.NegativeInfinity) return;
             if (FPS_Min > FPS)
@@ -45,13 +47,30 @@ namespace FRAMEDRAG.Engine
 
         public override void FixedUpdate(GameTime gameTime)
         {
-            string[] lines = new string[]
+            if (engine.Attributes.showfps > 0)
             {
-                $"FPS      : {Math.Round(FPS, 2).ToString().PadLeft(10)}",
-                $"FPS (Max): {Math.Round(FPS_Max, 2).ToString().PadLeft(10)}",
-                $"FPS (Min): {Math.Round(FPS_Min, 2).ToString().PadLeft(10)}",
-            };
-            TextOverlay.SetText(string.Join("\n", lines));
+                if (TextOverlay.Parent == null)
+                    engine.Stage.AddChild(TextOverlay);
+                string[] lines = new string[]
+                {
+                    $"FPS      : {Math.Round(FPS, 2).ToString().PadLeft(10)}",
+                };
+                if (engine.Attributes.showfps > 1)
+                {
+                    lines = new string[]
+                    {
+                        $"FPS      : {Math.Round(FPS, 2).ToString().PadLeft(10)}",
+                        $"FPS (Max): {Math.Round(FPS_Max, 2).ToString().PadLeft(10)}",
+                        $"FPS (Min): {Math.Round(FPS_Min, 2).ToString().PadLeft(10)}",
+                    };
+                }
+                TextOverlay.SetText(string.Join("\n", lines));
+            }
+            else
+            {
+                if (TextOverlay.Parent != null)
+                    TextOverlay.Parent.RemoveChild(TextOverlay);
+            }
         }
     }
 }
