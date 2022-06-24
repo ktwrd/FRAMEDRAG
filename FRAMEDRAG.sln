@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FRAMEDRAG.Engine", "Engine\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FRAMEDRAG.DVDExample", "FRAMEDRAG.DVDExample\FRAMEDRAG.DVDExample.csproj", "{8523271F-3059-4B9F-829C-7A1C7292B3B4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FRAMEDRAG.UIExample", "FRAMEDRAG.UIExample\FRAMEDRAG.UIExample.csproj", "{EB2BD70A-EDF1-422A-B641-2047D49E91AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FRAMEDRAG.UIExample", "FRAMEDRAG.UIExample\FRAMEDRAG.UIExample.csproj", "{EB2BD70A-EDF1-422A-B641-2047D49E91AB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{269CEEB8-6E53-4709-BF31-A6CC172FF05C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +32,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8523271F-3059-4B9F-829C-7A1C7292B3B4} = {269CEEB8-6E53-4709-BF31-A6CC172FF05C}
+		{EB2BD70A-EDF1-422A-B641-2047D49E91AB} = {269CEEB8-6E53-4709-BF31-A6CC172FF05C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6D2BF0A8-BA2F-4987-9A12-8C473DC7BBE1}
