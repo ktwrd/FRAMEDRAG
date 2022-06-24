@@ -34,6 +34,36 @@ namespace FRAMEDRAG.Engine
                     engine.graphicsDevice.ToggleFullScreen();
             }
         }
+        public int windowWidth
+        {
+            get
+            {
+                return engine.graphicsDevice.PreferredBackBufferWidth;
+            }
+            set
+            {
+                if (value > 0)
+                {
+                    engine.graphicsDevice.PreferredBackBufferWidth = value;
+                    engine.graphicsDevice.ApplyChanges();
+                }
+            }
+        }
+        public int windowHeight
+        {
+            get
+            {
+                return engine.graphicsDevice.PreferredBackBufferHeight;
+            }
+            set
+            {
+                if (value > 0)
+                {
+                    engine.graphicsDevice.PreferredBackBufferHeight = value;
+                    engine.graphicsDevice.ApplyChanges();
+                }
+            }
+        }
         public void quit()
         {
             Environment.Exit(0);
