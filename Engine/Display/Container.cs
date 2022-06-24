@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FRAMEDRAG.Engine.Core;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -19,10 +20,37 @@ namespace FRAMEDRAG.Engine.Display
     {
         public List<DisplayObject> Children = new List<DisplayObject>();
 
-        public Rectangle Bounds { get; private set; }
         public virtual void UpdateBounds()
         {
 
+        }
+        public FRectangle LocalBoundsRect;
+        public Bounds LocalBounds;
+        public virtual FRectangle GetLocalBounds(FRectangle rect)
+        {
+            if (rect == null)
+            {
+                if (LocalBoundsRect == null)
+                    LocalBoundsRect = new FRectangle();
+                rect = LocalBoundsRect;
+            }
+            if (LocalBounds == null)
+                LocalBounds = new Bounds();
+
+            return GetBounds(false, rect);
+        }
+        public FRectangle BoundsRect;
+        public Bounds Bounds;
+        public virtual FRectangle GetBounds(bool? skipUpdate, FRectangle? rect)
+        {
+            UpdateBounds();
+            if (rect == null)
+            {
+                if (BoundsRect == null)
+                    BoundsRect = new FRectangle();
+                rect = BoundsRect;
+            }
+            return this.Bounds.GetRectangle(rect);
         }
 
         public DisplayObject GetChildAt(int index)

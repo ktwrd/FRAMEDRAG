@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FRAMEDRAG.Engine.Core;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,30 @@ namespace FRAMEDRAG.Engine.Display
             Texture = texture;
             UpdateFrame = true;
         }
+
+
+        public FRectangle LocalBoundsRect;
+        public Bounds LocalBounds;
+        public virtual FRectangle GetBounds(FRectangle? rect)
+        {
+            if (Children.Count < 1)
+            {
+                if (LocalBounds == null)
+                    LocalBounds = new Bounds();
+                LocalBounds.minX = Texture.BaseTexture.Width * -Anchor.X;
+                LocalBounds.minY = Texture.BaseTexture.Height * -Anchor.Y;
+                LocalBounds.maxX = Texture.BaseTexture.Width * (1 - Anchor.X);
+                LocalBounds.maxY = Texture.BaseTexture.Height * (1 - Anchor.Y);
+                if (rect == null)
+                {
+                    if (LocalBoundsRect == null)
+                        LocalBoundsRect = new FRectangle();
+                    rect = LocalBoundsRect;
+                }
+            }
+            return base.getLocalBounds(rect);
+        }
+
         public bool UpdateFrame = false;
         public Vector2 Anchor;
         public Engine.Textures.Texture Texture;
