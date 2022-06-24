@@ -10,6 +10,13 @@ namespace FRAMEDRAG.Engine.Display
 {
     public class DisplayObject
     {
+        public DisplayObject()
+        {
+            EntityID = GlobalEngine.EntityCount;
+            GlobalEngine.EntityCount++;
+        }
+
+        protected ulong EntityID = 0;
         public DisplayObject Last;
         public DisplayObject First;
 
