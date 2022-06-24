@@ -202,6 +202,7 @@ namespace FRAMEDRAG.Engine.Display
             {
                 child.Draw(spriteBatch, engine);
             }
+            spriteBatch.DrawString(engine.DefaultFont, $"X:{Position.X}\nY:{Position.Y}\nE:{EntityID}", Position, Color.White);
             base.Draw(spriteBatch, engine);
         }
         protected bool IsCursorInteracting = false;
