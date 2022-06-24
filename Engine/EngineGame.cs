@@ -36,12 +36,6 @@ namespace FRAMEDRAG.Engine
         public int ClientShowFPS = 0;
         public EngineGameAttributes Attributes;
 
-        public static byte[] streamToByteArray(Stream input)
-        {
-            MemoryStream ms = new MemoryStream();
-            input.CopyTo(ms);
-            return ms.ToArray();
-        }
         public EngineGame()
         {
             Attributes = new EngineGameAttributes(this);
@@ -99,14 +93,17 @@ namespace FRAMEDRAG.Engine
         public ResourceManager ResourceMan;
         protected override void LoadContent()
         {
-            var fontstream = streamToByteArray(Assembly.GetAssembly(typeof(EngineCursor)).GetManifestResourceStream(@"FRAMEDRAG.Engine.BuiltinAssets.font.ttf"));
-            var baked = TtfFontBaker.Bake(
-                fontstream,
-                16,
-                460,
-                90,
-                new[] { CharacterRange.BasicLatin });
-            DefaultFont = baked.CreateSpriteFont(GraphicsDevice);
+            byte[]? fontstream = GeneralHelper.StreamToByteArray(Assembly.GetAssembly(typeof(EngineCursor)).GetManifestResourceStream(@"FRAMEDRAG.Engine.BuiltinAssets.font.ttf"));
+            if (fontstream != null)
+            {
+                var baked = TtfFontBaker.Bake(
+                    fontstream,
+                    16,
+                    460,
+                    90,
+                    new[] { CharacterRange.BasicLatin });
+                DefaultFont = baked.CreateSpriteFont(GraphicsDevice);
+            }
             spriteBatch = new SpriteBatch(GraphicsDevice);
             ResourceMan = new ResourceManager(this);
 
