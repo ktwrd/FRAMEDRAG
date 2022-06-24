@@ -21,6 +21,23 @@ namespace FRAMEDRAG.Engine
             this.engine = engine;
         }
         public int showfps = 0;
+        public int fpsmax
+        {
+            get
+            {
+                return engine.TargetFramerate;
+            }
+            set
+            {
+                if (value <= 5000)
+                {
+                    engine.TargetFramerate = value;
+                    engine.TargetElapsedTime = TimeSpan.FromSeconds(1f / engine.TargetFramerate);
+                }
+            }
+        }
+        public bool vsync
+        { get{ return engine.IsFixedTimeStep; } set{ engine.IsFixedTimeStep = value; } }
 
         public bool fullscreen
         {
