@@ -15,6 +15,10 @@ namespace FRAMEDRAG.Engine.Loaders
         private bool isPaused = false;
         private bool isStopped = false;
         private Texture2D[] textureArr = Array.Empty<Texture2D>();
+        public static AnimatedGIF FromStream(Stream input, EngineGame engine)
+        {
+            return FromStream(new BinaryReader(input), engine);
+        }
         public static AnimatedGIF FromStream(BinaryReader input, EngineGame engine)
         {
             int frameCount = input.ReadInt32();
