@@ -169,6 +169,7 @@ namespace FRAMEDRAG.Engine
             graphicsDevice.ApplyChanges();
         }
         #endregion
+        public ResourceManager ResourceMan;
         protected override void LoadContent()
         {
             var fontstream = streamToByteArray(Assembly.GetAssembly(typeof(EngineCursor)).GetManifestResourceStream(@"FRAMEDRAG.Engine.BuiltinAssets.font.ttf"));
@@ -180,9 +181,12 @@ namespace FRAMEDRAG.Engine
                 new[] { CharacterRange.BasicLatin });
             DefaultFont = baked.CreateSpriteFont(GraphicsDevice);
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            ResourceMan = new ResourceManager(this);
 
             Components.Add(new CursorOverlay(this));
             Components.Add(new StatsOverlay(this));
+            Components.Add(ResourceMan);
+            ResourceMan.LoadContent();
 
             base.LoadContent();
         }
