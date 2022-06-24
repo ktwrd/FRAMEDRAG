@@ -1,4 +1,5 @@
 ﻿using FRAMEDRAG.Engine.Display;
+using FRAMEDRAG.Engine.Helpers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -36,6 +37,7 @@ namespace FRAMEDRAG.Engine
         public int ClientShowFPS = 0;
         public EngineGameAttributes Attributes;
 
+        public InteractionManager Interaction;
         public EngineGame()
         {
             Attributes = new EngineGameAttributes(this);
@@ -109,6 +111,8 @@ namespace FRAMEDRAG.Engine
 
             Components.Add(new CursorOverlay(this));
             Components.Add(new StatsOverlay(this));
+            Interaction = new InteractionManager(this);
+            Components.Add(Interaction);
             Components.Add(ResourceMan);
             ResourceMan.LoadContent();
 
