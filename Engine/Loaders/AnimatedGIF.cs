@@ -19,7 +19,7 @@ namespace FRAMEDRAG.Engine.Loaders
         {
             return FromStream(new BinaryReader(input), engine);
         }
-        public static AnimatedGIF FromStream(BinaryReader input, EngineGame engine)
+        public static Texture2D[] ArrayFromStream(BinaryReader input, EngineGame engine)
         {
             int frameCount = input.ReadInt32();
             var frames = new List<Texture2D>();
@@ -40,7 +40,11 @@ namespace FRAMEDRAG.Engine.Loaders
                 }
             }
             input.Close();
-            return FromTextures(frames.ToArray());
+            return frames.ToArray();
+        }
+        public static AnimatedGIF FromStream(BinaryReader input, EngineGame engine)
+        {
+            return FromTextures(ArrayFromStream(input, engine));
         }
         public static AnimatedGIF FromTextures(Texture2D[] frames)
         {
