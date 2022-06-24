@@ -96,7 +96,7 @@ namespace FRAMEDRAG.Engine
         public double FixedUpdateTime = 1f / 15f;
         public double FixedFastUpdateTime = 1f / 500f;
 
-        public double TargetFramerate = 1000000f;
+        public int TargetFramerate = 5000;
         public float MouseSensitivity = 6f;
 
         public ConsoleComponent qConsole;
