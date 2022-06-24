@@ -208,8 +208,8 @@ namespace FRAMEDRAG.Engine.Display
         private MouseState? previousMouseState = null;
         public virtual void InteractiveCheck(GameTime gameTime, MouseState mouse, KeyboardState keyboard)
         {
-            if (mouse.X > Bounds.X && mouse.X < Bounds.X + Bounds.Width)
-                if (mouse.Y > Bounds.Y && mouse.Y < Bounds.Y + Bounds.Height)
+            if (mouse.X > Bounds.minX && mouse.X < Bounds.maxX)
+                if (mouse.Y > Bounds.minY && mouse.Y < Bounds.maxY)
                 {
                     IsCursorInteracting = true;
                     if (mouse.LeftButton == ButtonState.Pressed || mouse.MiddleButton == ButtonState.Pressed || mouse.RightButton == ButtonState.Pressed)
