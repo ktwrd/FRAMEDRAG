@@ -80,7 +80,9 @@ namespace FRAMEDRAG.ChessExample
         }
         public ChessGame Engine;
         public PieceTeam CurrentTeam = PieceTeam.White;
+        private void ResetBoard()
         {
+            
         }
     }
 }
