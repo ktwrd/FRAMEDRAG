@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,7 @@ namespace FRAMEDRAG.Engine
         }
         public int showfps = 0;
         public int debugtxt = 0;
+        public Color framebuffercolor = Color.Black;
         public int fpsmax
         {
             get
