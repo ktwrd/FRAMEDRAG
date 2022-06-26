@@ -128,8 +128,7 @@ namespace FRAMEDRAG.Engine
         internal KeyboardState? previousKeyboard = null;
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
-
+            GraphicsDevice.Clear(Attributes.framebuffercolor);
             spriteBatch.Begin(SpriteSortMode.BackToFront);
             Stage.Draw(spriteBatch, this);
             spriteBatch.End();
