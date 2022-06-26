@@ -19,16 +19,16 @@ namespace FRAMEDRAG.Engine
             Font = font;
         }
 
-        private string TextContent = @"";
+        internal string TextContent = @"";
         public void SetText(string content)
         {
             TextContent = content;
             UpdateText();
         }
 
-        private string[] lines = Array.Empty<string>();
-        private int[] lineHeight = Array.Empty<int>();
-        private int[] lineWidth = Array.Empty<int>();
+        internal string[] lines = Array.Empty<string>();
+        internal int[] lineHeight = Array.Empty<int>();
+        internal int[] lineWidth = Array.Empty<int>();
         public SpriteFont Font;
         public Vector2 Size = Vector2.Zero;
         public void UpdateText()
