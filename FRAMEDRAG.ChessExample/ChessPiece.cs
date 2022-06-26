@@ -45,6 +45,7 @@ namespace FRAMEDRAG.ChessExample
                 hs = hs * (tex.Height / (float)tex.Width);
             }
             PieceSprite.Scale = new Vector2(ws, hs);
+            PieceSprite.ZIndex = 10;
         }
         public Vector2 GlobalPosition()
         {
