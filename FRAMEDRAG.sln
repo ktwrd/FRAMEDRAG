@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FRAMEDRAG.UIExample", "FRAM
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{269CEEB8-6E53-4709-BF31-A6CC172FF05C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FRAMEDRAG.ChessExample", "FRAMEDRAG.ChessExample\FRAMEDRAG.ChessExample.csproj", "{09AE3955-4C22-4466-8E55-673FFAD7FCB0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{EB2BD70A-EDF1-422A-B641-2047D49E91AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB2BD70A-EDF1-422A-B641-2047D49E91AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB2BD70A-EDF1-422A-B641-2047D49E91AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09AE3955-4C22-4466-8E55-673FFAD7FCB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09AE3955-4C22-4466-8E55-673FFAD7FCB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09AE3955-4C22-4466-8E55-673FFAD7FCB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09AE3955-4C22-4466-8E55-673FFAD7FCB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,6 +42,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{8523271F-3059-4B9F-829C-7A1C7292B3B4} = {269CEEB8-6E53-4709-BF31-A6CC172FF05C}
 		{EB2BD70A-EDF1-422A-B641-2047D49E91AB} = {269CEEB8-6E53-4709-BF31-A6CC172FF05C}
+		{09AE3955-4C22-4466-8E55-673FFAD7FCB0} = {269CEEB8-6E53-4709-BF31-A6CC172FF05C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6D2BF0A8-BA2F-4987-9A12-8C473DC7BBE1}
