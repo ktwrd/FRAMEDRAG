@@ -58,6 +58,7 @@ namespace FRAMEDRAG.Engine
             this.lines = lines;
         }
 
+        #region Text Drawing
         public Color FontColor = Color.White;
         public Texture2D BlankTexture = null;
         public override void Draw(SpriteBatch spriteBatch, EngineGame engine)
@@ -86,5 +87,6 @@ namespace FRAMEDRAG.Engine
                 offset += new Vector2(0, lineHeight[i]);
             }
         }
+        #endregion
     }
 }

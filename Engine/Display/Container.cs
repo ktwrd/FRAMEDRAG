@@ -18,8 +18,9 @@ namespace FRAMEDRAG.Engine.Display
     }
     public class Container : DisplayObject
     {
-        public List<DisplayObject> Children = new List<DisplayObject>();
 
+        #region Bounds Calculation
+        // TODO Bounds Calculation
         public virtual void UpdateBounds()
         {
 
@@ -52,7 +53,9 @@ namespace FRAMEDRAG.Engine.Display
             }
             return this.Bounds.GetRectangle(rect);
         }
-
+        #endregion
+        #region Child
+        public List<DisplayObject> Children = new List<DisplayObject>();
         public DisplayObject GetChildAt(int index)
         {
             if (index < 1 || index > Children.Count)
@@ -155,16 +158,6 @@ namespace FRAMEDRAG.Engine.Display
                 throw new Exception(@"The supplied DisplayObject must be a child");
             }
         }
-        public new void UpdateTransform()
-        {
-            if (!Visible)
-                return;
-            base.UpdateTransform();
-            foreach (var child in Children)
-            {
-                child.UpdateTransform();
-            }
-        }
         public static DisplayObject[] GetChildrenTree(Container container, bool? notRoot)
         {
             var childs = new List<DisplayObject>();
@@ -196,6 +189,18 @@ namespace FRAMEDRAG.Engine.Display
             }
             return childs.ToArray();
         }
+        #endregion
+        #region Drawing-related
+        public new void UpdateTransform()
+        {
+            if (!Visible)
+                return;
+            base.UpdateTransform();
+            foreach (var child in Children)
+            {
+                child.UpdateTransform();
+            }
+        }
         public override void Draw(SpriteBatch spriteBatch, EngineGame engine)
         {
             foreach (var child in Children)
@@ -206,6 +211,7 @@ namespace FRAMEDRAG.Engine.Display
             spriteBatch.DrawString(engine.DefaultFont, $"X:{pos.X}\nY:{pos.Y}\nE:{EntityID}", pos, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
             base.Draw(spriteBatch, engine);
         }
+        #endregion
         protected bool IsCursorInteracting = false;
         private MouseState? previousMouseState = null;
         // TODO this really should be moved to the InteractionManager
