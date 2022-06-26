@@ -9,5 +9,13 @@ namespace FRAMEDRAG.ChessExample
 {
     public class ChessGame : EngineGame
     {
+        protected override void LoadContent()
+        {
+            base.LoadContent();
+
+            GameBoard = new ChessBoard();
+            Components.Add(GameBoard);
+        }
+        public ChessBoard GameBoard;
     }
 }
