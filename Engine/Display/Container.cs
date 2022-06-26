@@ -108,6 +108,11 @@ namespace FRAMEDRAG.Engine.Display
             if (previousObject != null)
                 previousObject._iNext = childFirst;
         }
+        public void RemoveChild()
+        {
+            foreach (var c in Children)
+                RemoveChild(c);
+        }
         public void RemoveChild(DisplayObject child)
         {
             var index = Children.IndexOf(child);
