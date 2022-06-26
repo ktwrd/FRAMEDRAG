@@ -84,5 +84,11 @@ namespace FRAMEDRAG.ChessExample
         {
             
         }
+        public ChessPiece AddPiece(Piece type, PieceTeam team)
+        {
+            var piece = new ChessPiece(Engine);
+            return piece;
+        }
+
     }
 }
