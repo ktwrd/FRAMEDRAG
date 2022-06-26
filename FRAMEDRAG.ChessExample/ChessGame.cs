@@ -1,4 +1,5 @@
 ﻿using FRAMEDRAG.Engine;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace FRAMEDRAG.ChessExample
         {
             base.LoadContent();
 
-            GameBoard = new ChessBoard();
+            GameBoard = new ChessBoard(this);
             Components.Add(GameBoard);
         }
         public ChessBoard GameBoard;
