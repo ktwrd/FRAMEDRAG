@@ -98,10 +98,20 @@ namespace FRAMEDRAG.ChessExample
             Pieces.Clear();
 
             for (int t = 0; t < 2; t++)
+            {
                 for (int i = 0; i < 8; i++)
                     AddPiece(Piece.Pawn, (PieceTeam)t, new Vector2(i, t == 0 ? 1 : 6));
-
-
+                var y = t == 0 ? 0 : 7;
+                for (int i = 0; i < 3; i++)
+                    AddPiece(Piece.Rook, (PieceTeam)t, new Vector2(i == 0 ? 0 : 7, y));
+                for (int i = 0; i < 3; i++)
+                    AddPiece(Piece.Knight, (PieceTeam)t, new Vector2(i == 0 ? 1 : 6, y));
+                for (int i = 0; i < 3; i++)
+                    AddPiece(Piece.Bishop, (PieceTeam)t, new Vector2(i == 0 ? 2 : 5, y));
+                AddPiece(Piece.Queen, (PieceTeam)t, new Vector2(3, y));
+                AddPiece(Piece.King, (PieceTeam)t, new Vector2(4, y));
+            }
+            ChessContainer.AddChild(BoardSprite);
         }
         public List<ChessPiece> Pieces = new List<ChessPiece>();
         public ChessPiece AddPiece(Piece type, PieceTeam team, Vector2 position)
