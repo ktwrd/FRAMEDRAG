@@ -1,4 +1,5 @@
-﻿using QuakeConsole;
+﻿using Microsoft.Xna.Framework;
+using QuakeConsole;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,10 +32,10 @@ namespace FRAMEDRAG.Engine
             InitalizeValues();
             Engine.qConsole.Interpreter = Interpreter;
         }
-
         internal void InitalizeValues()
         {
             Interpreter.AddVariable(@"engine", Engine.Attributes);
+            Interpreter.AddType(typeof(Color));
         }
     }
 }
