@@ -73,9 +73,10 @@ namespace FRAMEDRAG.Engine.Display
 
         public override void Draw(SpriteBatch spriteBatch, EngineGame engine)
         {
+            var gpos = GlobalPosition();
             var rect = new Rectangle(
-                    Convert.ToInt32(Position.X),
-                    Convert.ToInt32(Position.Y),
+                    Convert.ToInt32(gpos.X),
+                    Convert.ToInt32(gpos.Y),
                     Convert.ToInt32(Width),
                     Convert.ToInt32(Height));
             spriteBatch.Draw(

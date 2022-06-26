@@ -72,7 +72,7 @@ namespace FRAMEDRAG.Engine
             for (int i = 0; i < lines.Length; i++)
             {
                 string line = lines[i];
-                var pos = Position + offset;
+                var pos = GlobalPosition() + offset;
                 spriteBatch.DrawString(
                     engine.DefaultFont,
                     line,
