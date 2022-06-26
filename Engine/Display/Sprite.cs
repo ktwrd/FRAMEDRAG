@@ -73,6 +73,7 @@ namespace FRAMEDRAG.Engine.Display
 
         public override void Draw(SpriteBatch spriteBatch, EngineGame engine)
         {
+            base.Draw(spriteBatch, engine);
             var gpos = GlobalPosition();
             var rect = new Rectangle(
                     Convert.ToInt32(gpos.X),
@@ -87,8 +88,7 @@ namespace FRAMEDRAG.Engine.Display
                 0f,
                 Vector2.Zero,
                 SpriteEffects.None,
-                Convert.ToSingle(ZIndex/int.MaxValue));
-            base.Draw(spriteBatch, engine);
+                Convert.ToSingle(1 - (ZIndex / int.MaxValue)));
         }
     }
 }

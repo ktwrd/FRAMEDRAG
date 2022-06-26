@@ -63,6 +63,7 @@ namespace FRAMEDRAG.Engine
         public Texture2D BlankTexture = null;
         public override void Draw(SpriteBatch spriteBatch, EngineGame engine)
         {
+            base.Draw(spriteBatch, engine);
             if (BlankTexture == null)
             {
                 var t = new Texture2D(engine.GraphicsDevice, 1, 1);
@@ -83,7 +84,7 @@ namespace FRAMEDRAG.Engine
                     Vector2.Zero,
                     1f,
                     SpriteEffects.None,
-                    Convert.ToSingle(ZIndex / int.MaxValue));
+                    Convert.ToSingle(1 - (ZIndex / int.MaxValue)));
                 offset += new Vector2(0, lineHeight[i]);
             }
         }

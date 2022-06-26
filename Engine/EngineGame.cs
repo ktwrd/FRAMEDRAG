@@ -130,7 +130,7 @@ namespace FRAMEDRAG.Engine
         {
             GraphicsDevice.Clear(Color.Black);
 
-            spriteBatch.Begin(SpriteSortMode.FrontToBack);
+            spriteBatch.Begin(SpriteSortMode.BackToFront);
             Stage.Draw(spriteBatch, this);
             spriteBatch.End();
             base.Draw(gameTime);

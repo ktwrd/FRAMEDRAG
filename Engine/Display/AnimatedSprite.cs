@@ -70,6 +70,7 @@ namespace FRAMEDRAG.Engine.Display
         private Rectangle CachedRectangle = new Rectangle(0,0,0,0);
         public override void Draw(SpriteBatch spriteBatch, EngineGame engine)
         {
+            base.Draw(spriteBatch, engine);
             if (Visible)
             {
                 spriteBatch.Draw(

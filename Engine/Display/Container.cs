@@ -203,13 +203,14 @@ namespace FRAMEDRAG.Engine.Display
         }
         public override void Draw(SpriteBatch spriteBatch, EngineGame engine)
         {
+            var pos = GlobalPosition();
+            base.Draw(spriteBatch, engine);
             foreach (var child in Children)
             {
                 child.Draw(spriteBatch, engine);
             }
-            var pos = GlobalPosition();
-            spriteBatch.DrawString(engine.DefaultFont, $"X:{pos.X}\nY:{pos.Y}\nE:{EntityID}", pos, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
-            base.Draw(spriteBatch, engine);
+            if (engine.Attributes.debugtxt > 0)
+                spriteBatch.DrawString(engine.DefaultFont, $"X:{pos.X}\nY:{pos.Y}\nE:{EntityID}", pos, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
         }
         #endregion
         protected bool IsCursorInteracting = false;
