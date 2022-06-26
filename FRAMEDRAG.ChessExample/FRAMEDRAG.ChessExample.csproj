@@ -10,5 +10,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Engine\FRAMEDRAG.Engine.csproj" />
   </ItemGroup>
+	<Target Name="AfterBuild">
+		<Copy SourceFiles="$(ProjectDir)Assets" DestinationFolder="$(ProjectDir)$(OutDir)" ContinueOnError="false" />
+	</Target>
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+	  <Exec Command="mkdir $(ProjectDir)$(OutDir)Assets&#xD;&#xA;xcopy /y $(ProjectDir)Assets  $(ProjectDir)$(OutDir)Assets" />
+	</Target>
 
 </Project>
