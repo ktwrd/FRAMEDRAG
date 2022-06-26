@@ -14,6 +14,7 @@ namespace FRAMEDRAG.Engine
             this.engine = engine;
         }
         public int showfps = 0;
+        public int debugtxt = 0;
         public int fpsmax
         {
             get
