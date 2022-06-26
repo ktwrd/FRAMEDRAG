@@ -38,7 +38,8 @@ namespace FRAMEDRAG.Engine
                 var stream = engineAssembly.GetManifestResourceStream(name);
                 if (stream == null)
                     continue;
-                StreamCache.Add(cleanName, stream);
+                if (StreamCache.ContainsKey(cleanName))
+                    StreamCache.Add(cleanName, stream);
                 switch (extension)
                 {
                     case @"png":
