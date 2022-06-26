@@ -118,5 +118,44 @@ namespace FRAMEDRAG.ChessExample
             ChessContainer.AddChild(piece.PieceSprite);
             return piece;
         }
+
+        #region Hover Detection
+        internal Vector2 HoveredTile = new Vector2(0, 0);
+
+        internal MouseState previousMouseState;
+        internal KeyboardState previousKeyboardState;
+        public override void Update(GameTime gameTime)
+        {
+            var kstate = Keyboard.GetState();
+            var mstate = Mouse.GetState();
+            var size = ChessPieceSize * ChessBoardSize;
+            var cglobal = ChessContainer.GlobalPosition();
+            if (previousMouseState != null)
+            {
+                if (mstate.Position.X > cglobal.X && mstate.Position.X < cglobal.X + size)
+                    if (mstate.Position.Y > cglobal.Y && mstate.Position.Y < cglobal.Y + size)
+                    {
+                        HoveredTile.X = (float)Math.Floor((mstate.Position.X - cglobal.X) / ChessPieceSize);
+                        HoveredTile.Y = (float)Math.Floor((mstate.Position.Y - cglobal.Y) / ChessPieceSize);
+                    }
+            }
+            if (previousKeyboardState != null)
+            {
+
+            }
+
+            previousKeyboardState = kstate;
+            previousMouseState = mstate;
+
+            base.Update(gameTime);
+        }
+        public override void FixedUpdate(GameTime gameTime)
+        {
+            DebugText.SetText($"Selected\n({HoveredTile.X}, {HoveredTile.Y})");
+            base.FixedUpdate(gameTime);
+        }
+        public Text DebugText;
+
+        #endregion
     }
 }
