@@ -26,6 +26,12 @@ namespace FRAMEDRAG.ChessExample
         White,
         Black
     }
+    public enum PieceStatus
+    {
+        Unknown = -1,
+        Active,
+        Stolen
+    }
 
     public class ChessBoard : Component
     {
@@ -77,18 +83,40 @@ namespace FRAMEDRAG.ChessExample
             ChessContainer.Position.Y = 100;
 
             engine.Stage.AddChild(ChessContainer);
+
+            ResetBoard();
         }
         public ChessGame Engine;
         public PieceTeam CurrentTeam = PieceTeam.White;
         private void ResetBoard()
         {
-            
+            foreach (var p in Pieces)
+            {
+                if (p.PieceSprite.Parent != null)
+                    p.PieceSprite.Parent.RemoveChild(p.PieceSprite);
+            }
+            Pieces.Clear();
+
+            for (int t = 0; t < 2; t++)
+                for (int i = 0; i < 8; i++)
+                    AddPiece(Piece.Pawn, (PieceTeam)t, new Vector2(i, t == 0 ? 1 : 6));
+
+
         }
-        public ChessPiece AddPiece(Piece type, PieceTeam team)
+        public List<ChessPiece> Pieces = new List<ChessPiece>();
+        public ChessPiece AddPiece(Piece type, PieceTeam team, Vector2 position)
         {
-            var piece = new ChessPiece(Engine);
+            var piece = new ChessPiece(Engine, this)
+            {
+                BoardPosition = position,
+                PieceType = type,
+                Team = team,
+                Status = PieceStatus.Active
+            };
+            piece.UpdateSprite();
+            Pieces.Add(piece);
+            ChessContainer.AddChild(piece.PieceSprite);
             return piece;
         }
-
     }
 }
