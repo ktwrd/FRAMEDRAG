@@ -2,6 +2,7 @@
 using FRAMEDRAG.Engine.Display;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,8 +24,8 @@ namespace FRAMEDRAG.ChessExample
     public enum PieceTeam
     {
         Unknown = -1,
+        Black,
         White,
-        Black
     }
     public enum PieceStatus
     {
@@ -36,6 +37,7 @@ namespace FRAMEDRAG.ChessExample
     public class ChessBoard : Component
     {
         public Container ChessContainer;
+        public Container ChessContainerOverlay;
         public Sprite BoardSprite;
         public Dictionary<string, Texture2D> ChessPieceTextures = new Dictionary<string, Texture2D>();
 
@@ -45,6 +47,8 @@ namespace FRAMEDRAG.ChessExample
         {
             Engine = engine;
             ChessContainer = new Container();
+            ChessContainerOverlay = new Container();
+            DebugText = new Text("X: -1\nY: -1", Engine.DefaultFont);
             // Get list of PNG's in the Assets folder
             foreach (var name in Directory.GetFiles(Path.Combine(Directory.GetCurrentDirectory(), @"Assets")))
             {
@@ -70,21 +74,22 @@ namespace FRAMEDRAG.ChessExample
                     }
                     else
                     {
-                        colorList.Add(Color.Black);
+                        colorList.Add(Color.Transparent);
                     }
                 }
             }
             chessBoardTexture2D.SetData<Color>(colorList.ToArray());
 
             BoardSprite = new Sprite(new Engine.Textures.Texture(chessBoardTexture2D));
-            ChessContainer.AddChild(BoardSprite);
 
             ChessContainer.Position.X = 100;
-            ChessContainer.Position.Y = 100;
+            ChessContainer.Position.Y = 50;
+            DebugText.Position = new Vector2(-100f, 0f);
+            ChessContainer.AddChild(DebugText);
+            ChessContainer.AddChild(ChessContainerOverlay);
+            ResetBoard();
 
             engine.Stage.AddChild(ChessContainer);
-
-            ResetBoard();
         }
         public ChessGame Engine;
         public PieceTeam CurrentTeam = PieceTeam.White;
@@ -113,6 +118,7 @@ namespace FRAMEDRAG.ChessExample
             }
             ChessContainer.AddChild(BoardSprite);
         }
+        #region Piece Management
         public List<ChessPiece> Pieces = new List<ChessPiece>();
         public ChessPiece AddPiece(Piece type, PieceTeam team, Vector2 position)
         {
@@ -128,6 +134,7 @@ namespace FRAMEDRAG.ChessExample
             ChessContainer.AddChild(piece.PieceSprite);
             return piece;
         }
+        #endregion
 
         #region Hover Detection
         internal Vector2 HoveredTile = new Vector2(0, 0);
