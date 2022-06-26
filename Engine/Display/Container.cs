@@ -208,6 +208,7 @@ namespace FRAMEDRAG.Engine.Display
         }
         protected bool IsCursorInteracting = false;
         private MouseState? previousMouseState = null;
+        // TODO this really should be moved to the InteractionManager
         public virtual void InteractiveCheck(GameTime gameTime, MouseState mouse, KeyboardState keyboard)
         {
             if (mouse.X > Bounds.minX && mouse.X < Bounds.maxX)
