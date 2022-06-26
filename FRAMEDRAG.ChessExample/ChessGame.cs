@@ -17,6 +17,11 @@ namespace FRAMEDRAG.ChessExample
             GameBoard = new ChessBoard(this);
             Components.Add(GameBoard);
         }
+        protected override void Initialize()
+        {
+            base.Initialize();
+            UpdateWindowSize(640, 480);
+        }
         public ChessBoard GameBoard;
     }
 }
