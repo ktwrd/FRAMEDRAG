@@ -49,6 +49,12 @@ namespace FRAMEDRAG.Engine.Display
                 this.Stage.Dirty = true;
             }
         }
+        public Vector2 GlobalPosition()
+        {
+            if (Parent != null)
+                return Parent.GlobalPosition() + Position;
+            return Position;
+        }
         /*private Graphics mask;
         public Graphics Mask
         {
