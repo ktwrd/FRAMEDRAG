@@ -68,6 +68,10 @@ namespace FRAMEDRAG.Engine
 
         protected override void Initialize()
         {
+            GraphicsDevice.RasterizerState = new RasterizerState()
+            {
+                CullMode = CullMode.None
+            };
             graphicsDevice.HardwareModeSwitch = true;
             graphicsDevice.GraphicsProfile = GraphicsProfile.HiDef;
             graphicsDevice.SynchronizeWithVerticalRetrace = true;
