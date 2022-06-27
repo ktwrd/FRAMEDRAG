@@ -24,8 +24,11 @@
 	<Target Name="AfterBuild">
 		<Copy SourceFiles="$(ProjectDir)Assets" DestinationFolder="$(ProjectDir)$(OutDir)" ContinueOnError="false" />
 	</Target>
-	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-	  <Exec Command="mkdir $(ProjectDir)$(OutDir)Assets&#xD;&#xA;xcopy /y $(ProjectDir)Assets  $(ProjectDir)$(OutDir)Assets" />
-	</Target>
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition=" '$(OS)' != 'Windows_NT' ">
+        <Exec Command="mkdir $(ProjectDir)$(OutDir)Assets&#xD;&#xA;cp -r $(ProjectDir)Assets  $(ProjectDir)$(OutDir)" />
+    </Target>
+    <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition=" '$(OS)' == 'Windows_NT' ">
+        <Exec Command="mkdir $(ProjectDir)$(OutDir)Assets&#xD;&#xA;xcopy /y $(ProjectDir)Assets  $(ProjectDir)$(OutDir)Assets" />
+    </Target>
 
 </Project>
