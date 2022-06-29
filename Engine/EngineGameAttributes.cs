@@ -32,8 +32,17 @@ namespace FRAMEDRAG.Engine
                 }
             }
         }
-        public bool vsync
+        public bool fixedtime
         { get { return engine.IsFixedTimeStep; } set { engine.IsFixedTimeStep = value; } }
+        public bool vsync
+        {
+            get { return engine.graphicsDevice.SynchronizeWithVerticalRetrace;  }
+            set
+            {
+                engine.graphicsDevice.SynchronizeWithVerticalRetrace = value;
+                engine.graphicsDevice.ApplyChanges();
+            }
+        }
 
         public bool fullscreen
         {
