@@ -74,7 +74,7 @@ namespace FRAMEDRAG.Engine
             };
             graphicsDevice.HardwareModeSwitch = true;
             graphicsDevice.GraphicsProfile = GraphicsProfile.HiDef;
-            graphicsDevice.SynchronizeWithVerticalRetrace = true;
+            graphicsDevice.SynchronizeWithVerticalRetrace = false;
             UpdateWindowSize();
 
             IsFixedTimeStep = false;
