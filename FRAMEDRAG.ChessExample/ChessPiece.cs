@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Input;
 
 namespace FRAMEDRAG.ChessExample
 {
@@ -58,9 +59,25 @@ namespace FRAMEDRAG.ChessExample
                 Board.ChessPieceSize * (BoardPosition.X),
                 Board.ChessPieceSize * (BoardPosition.Y));
         }
+
+        private bool FollowMouse = false;
         public override void FixedUpdate(GameTime gameTime)
         {
             PieceSprite.Position = LocalPosition();
+            if (Board.MouseDownTile.X < 0 && Board.MouseDownTile.Y < 0)
+                FollowMouse = false;
+            else
+            {
+                if (Board.MouseDownTile == BoardPosition)
+                    FollowMouse = true;
+                else
+                    FollowMouse = false;
+                var mpos = Mouse.GetState();
+                if (FollowMouse)
+                {
+                    PieceSprite.Position = PieceSprite.GlobalToLocal(new Vector2(mpos.X, mpos.Y)) + LocalPosition();
+                }
+            }
 
             base.FixedUpdate(gameTime);
         }
