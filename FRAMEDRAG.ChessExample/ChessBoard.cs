@@ -165,25 +165,40 @@ namespace FRAMEDRAG.ChessExample
             previousKeyboardState = kstate;
             previousMouseState = mstate;
 
+            foreach (var i in Pieces)
+                i.Update(gameTime);
+            
             base.Update(gameTime);
         }
 
-        private Vector2 MouseDownTile = new Vector2(-1, -1);
-        private Vector2 DestinationTile = new Vector2(-1, -1);
+        public Vector2 MouseDownTile = new Vector2(-1, -1);
+        public Vector2 DestinationTile = new Vector2(-1, -1);
         public void CheckTileSelection(GameTime gameTime, MouseState mouseState)
         {
+            // Player released cursor
             if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Pressed)
             {
                 DestinationTile = HoveredTile;
             }
+            // Player is pressing down mouse button
             else if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
             {
                 MouseDownTile = HoveredTile;
+            }
+            else if (mouseState.LeftButton == ButtonState.Released &&
+                     previousMouseState.LeftButton == ButtonState.Released)
+            {
+                MouseDownTile = new Vector2(-1, -1);
+                DestinationTile = new Vector2(-1, -1);
             }
         }
         public override void FixedUpdate(GameTime gameTime)
         {
             DebugText.SetText($"Selected\n({HoveredTile.X}, {HoveredTile.Y})\n\nF ({MouseDownTile.X}, {MouseDownTile.Y})\nT ({DestinationTile.X}, {DestinationTile.Y})");
+            
+            foreach (var i in Pieces)
+                i.FixedUpdate(gameTime);
+            
             base.FixedUpdate(gameTime);
         }
         public Text DebugText;
