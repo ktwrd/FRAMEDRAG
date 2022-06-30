@@ -155,6 +155,7 @@ namespace FRAMEDRAG.ChessExample
                         HoveredTile.X = (float)Math.Floor((mstate.Position.X - cglobal.X) / ChessPieceSize);
                         HoveredTile.Y = (float)Math.Floor((mstate.Position.Y - cglobal.Y) / ChessPieceSize);
                     }
+                CheckTileSelection(gameTime, mstate);
             }
             if (previousKeyboardState != null)
             {
@@ -166,9 +167,23 @@ namespace FRAMEDRAG.ChessExample
 
             base.Update(gameTime);
         }
+
+        private Vector2 MouseDownTile = new Vector2(-1, -1);
+        private Vector2 DestinationTile = new Vector2(-1, -1);
+        public void CheckTileSelection(GameTime gameTime, MouseState mouseState)
+        {
+            if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Pressed)
+            {
+                DestinationTile = HoveredTile;
+            }
+            else if (mouseState.LeftButton == ButtonState.Pressed && previousMouseState.LeftButton == ButtonState.Released)
+            {
+                MouseDownTile = HoveredTile;
+            }
+        }
         public override void FixedUpdate(GameTime gameTime)
         {
-            DebugText.SetText($"Selected\n({HoveredTile.X}, {HoveredTile.Y})");
+            DebugText.SetText($"Selected\n({HoveredTile.X}, {HoveredTile.Y})\n\nF ({MouseDownTile.X}, {MouseDownTile.Y})\nT ({DestinationTile.X}, {DestinationTile.Y})");
             base.FixedUpdate(gameTime);
         }
         public Text DebugText;
