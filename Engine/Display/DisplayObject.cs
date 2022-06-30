@@ -55,6 +55,11 @@ namespace FRAMEDRAG.Engine.Display
                 return Parent.GlobalPosition() + Position;
             return Position;
         }
+
+        public Vector2 GlobalToLocal(Vector2 pos)
+        {
+            return pos - GlobalPosition();
+        }
         /*private Graphics mask;
         public Graphics Mask
         {
