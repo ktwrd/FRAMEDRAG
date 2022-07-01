@@ -48,6 +48,12 @@ namespace FRAMEDRAG.ChessExample
             PieceSprite.Scale = new Vector2(ws, hs);
             PieceSprite.ZIndex = 10;
         }
+
+        public void SetBoardPosition(Vector2 boardPosition)
+        {
+            BoardPosition = boardPosition;
+            UpdateSprite();
+        }
         public Vector2 GlobalPosition()
         {
             var relativeSpriteLocation = LocalPosition();
@@ -63,22 +69,38 @@ namespace FRAMEDRAG.ChessExample
         private bool FollowMouse = false;
         public override void FixedUpdate(GameTime gameTime)
         {
+            var newFollowMouse = false;
             PieceSprite.Position = LocalPosition();
-            if (Board.MouseDownTile.X < 0 && Board.MouseDownTile.Y < 0)
-                FollowMouse = false;
-            else
+            if (Board.MouseDownTile.X >= 0 && Board.MouseDownTile.Y >= 0)
             {
                 if (Board.MouseDownTile == BoardPosition)
+                {
                     FollowMouse = true;
+                }
                 else
+                {
                     FollowMouse = false;
+                }
+                
                 var mpos = Mouse.GetState();
                 if (FollowMouse)
                 {
                     PieceSprite.Position = PieceSprite.GlobalToLocal(new Vector2(mpos.X, mpos.Y)) + LocalPosition();
                 }
-            }
 
+                if (mpos.LeftButton == ButtonState.Released &&
+                    Board.previousMouseState.LeftButton == ButtonState.Pressed)
+                {
+                    var isvalid = Board.Brain.IsMoveValid(this, Board.MouseDownTile, Board.DestinationTile);
+                    if (isvalid)
+                    {
+                        SetBoardPosition(Board.DestinationTile);
+                    }
+                    Console.WriteLine($"Set Board Position to; {BoardPosition.X}, {BoardPosition.Y}");
+
+                    FollowMouse = false;
+                }
+            }
             base.FixedUpdate(gameTime);
         }
     }
