@@ -90,6 +90,8 @@ namespace FRAMEDRAG.ChessExample
             ResetBoard();
 
             engine.Stage.AddChild(ChessContainer);
+
+            Brain = new ChessActionController(this);
         }
         public ChessGame Engine;
         public PieceTeam CurrentTeam = PieceTeam.White;
