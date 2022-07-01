@@ -204,5 +204,7 @@ namespace FRAMEDRAG.ChessExample
         public Text DebugText;
 
         #endregion
+
+        public ChessActionController Brain;
     }
 }
