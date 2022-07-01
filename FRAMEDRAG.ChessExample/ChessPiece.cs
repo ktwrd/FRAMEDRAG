@@ -67,6 +67,26 @@ namespace FRAMEDRAG.ChessExample
         }
 
         private bool FollowMouse = false;
+
+        private MouseState previousMouseState;
+        public override void Update(GameTime gameTime)
+        {
+            var mpos = Mouse.GetState();
+            if (previousMouseState != null && mpos.LeftButton == ButtonState.Released &&
+                previousMouseState.LeftButton == ButtonState.Pressed)
+            {
+                var isvalid = Board.Brain.IsMoveValid(this, Board.MouseDownTile, Board.DestinationTile);
+                if (isvalid)
+                {
+                    SetBoardPosition(Board.DestinationTile);
+                }
+                Console.WriteLine($"Set Board Position to; {BoardPosition.X}, {BoardPosition.Y}");
+
+                FollowMouse = false;
+            }
+
+            previousMouseState = mpos;
+        }
         public override void FixedUpdate(GameTime gameTime)
         {
             var newFollowMouse = false;
@@ -88,18 +108,6 @@ namespace FRAMEDRAG.ChessExample
                     PieceSprite.Position = PieceSprite.GlobalToLocal(new Vector2(mpos.X, mpos.Y)) + LocalPosition();
                 }
 
-                if (mpos.LeftButton == ButtonState.Released &&
-                    Board.previousMouseState.LeftButton == ButtonState.Pressed)
-                {
-                    var isvalid = Board.Brain.IsMoveValid(this, Board.MouseDownTile, Board.DestinationTile);
-                    if (isvalid)
-                    {
-                        SetBoardPosition(Board.DestinationTile);
-                    }
-                    Console.WriteLine($"Set Board Position to; {BoardPosition.X}, {BoardPosition.Y}");
-
-                    FollowMouse = false;
-                }
             }
             base.FixedUpdate(gameTime);
         }
