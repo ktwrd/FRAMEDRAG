@@ -407,7 +407,7 @@ public class ChessActionController
     };
     public bool IsMoveValid(ChessPiece piece, Vector2 from, Vector2 to)
     {
-        ChessPiece currentKing = null;
+        ChessPiece? currentKing = null;
         foreach (var p in Board.Pieces)
         {
             if (p.PieceType == Piece.King)
