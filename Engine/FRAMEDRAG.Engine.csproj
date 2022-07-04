@@ -45,6 +45,7 @@
     <None Remove="BuiltinAssets\cursor\zoom-in.png" />
     <None Remove="BuiltinAssets\cursor\zoom-out.png" />
     <None Remove="BuiltinAssets\font.ttf" />
+    <None Remove="BuiltinAssets\graygrid.png" />
 	  <None Remove="Icon.bmp" />
 	  <None Remove="Icon.ico" />
   </ItemGroup>
@@ -90,6 +91,7 @@
     <EmbeddedResource Include="BuiltinAssets\cursor\zoom-in.png" />
     <EmbeddedResource Include="BuiltinAssets\cursor\zoom-out.png" />
     <EmbeddedResource Include="BuiltinAssets\font.ttf" />
+    <EmbeddedResource Include="BuiltinAssets\graygrid.png" />
 	  <EmbeddedResource Include="Icon.bmp">
 		  <LogicalName>Icon.bmp</LogicalName>
 	  </EmbeddedResource>

@@ -55,5 +55,11 @@ namespace FRAMEDRAG.Engine
                 }
             }
         }
+
+        public Texture2D? GetTexture(string key) {
+            if (TextureCache.ContainsKey(key))
+                return TextureCache[key];
+            return null;
+        }
     }
 }

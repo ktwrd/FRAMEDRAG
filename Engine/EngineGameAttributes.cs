@@ -96,6 +96,10 @@ namespace FRAMEDRAG.Engine
                 }
             }
         }
+        public void restoreWindow()
+        {
+            engine.RestoreWindowSize();
+        }
         public void quit()
         {
             Environment.Exit(0);

@@ -85,7 +85,6 @@ namespace FRAMEDRAG.Engine
             Stage = new Stage(this);
 
             PresentationParameters pp = GraphicsDevice.PresentationParameters;
-            GraphicsDevice.PresentationParameters.MultiSampleCount = 0;
             scene = new RenderTarget2D(GraphicsDevice, VirtualWidth, VirtualHeight, false, SurfaceFormat.Color, DepthFormat.None, pp.MultiSampleCount, RenderTargetUsage.DiscardContents);
             Window.AllowUserResizing = true;
 
@@ -96,22 +95,22 @@ namespace FRAMEDRAG.Engine
         public Vector2 WindowCursorPosition { get; private set; }
 
         #region Window Size
-        public float WindowRatio
-        {
-            get
-            {
-                return graphicsDevice.PreferredBackBufferWidth / 900f;
-            }
-        }
         public void UpdateWindowSize()
         {
-            UpdateWindowSize(0,0);
+            UpdateWindowSize(VirtualWidth, VirtualHeight);
         }
         public void UpdateWindowSize(int width, int height)
         {
-            /*graphicsDevice.PreferredBackBufferWidth = width;
-            graphicsDevice.PreferredBackBufferHeight = height;
-            graphicsDevice.ApplyChanges();*/
+            VirtualWidth = width;
+            VirtualHeight = height;
+            PresentationParameters pp = GraphicsDevice.PresentationParameters;
+            scene = new RenderTarget2D(GraphicsDevice, VirtualWidth, VirtualHeight, false, SurfaceFormat.Color, DepthFormat.None, pp.MultiSampleCount, RenderTargetUsage.DiscardContents);
+        }
+        public void RestoreWindowSize()
+        {
+            graphicsDevice.PreferredBackBufferWidth = VirtualWidth;
+            graphicsDevice.PreferredBackBufferHeight = VirtualHeight;
+            graphicsDevice.ApplyChanges();
         }
         #endregion
         public ResourceManager ResourceMan;
@@ -197,11 +196,23 @@ namespace FRAMEDRAG.Engine
 
             GraphicsDevice.SetRenderTarget(null);
 
+
             // clear to get black bars
             GraphicsDevice.Clear(ClearOptions.Target, Color.Black, 1.0f, 0);
 
             // draw a quad to get the draw buffer to the back buffer
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque, SamplerState.PointWrap);
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque, SamplerState.PointClamp);
+            var tex = ResourceMan.GetTexture(@"Engine.BuiltinAssets.graygrid");
+            if (tex != null)
+            {
+                var srcrect = new Rectangle(0, 0, tex.Width, tex.Height);
+                var scale = new Vector2((float)Window.ClientBounds.Width / srcrect.Width, (float)Window.ClientBounds.Height / srcrect.Height);
+                if (scale.X > scale.Y)
+                    scale.Y = scale.X;
+                if (scale.Y > scale.X)
+                    scale.X = scale.Y;
+                spriteBatch.Draw(tex, Vector2.Zero, srcrect, Color.White, 0, Vector2.Zero, scale, SpriteEffects.None, 0);
+            }
             spriteBatch.Draw(scene, dst, Color.White);
             spriteBatch.End();
         }
