@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,6 +43,15 @@ namespace FRAMEDRAG.Engine
                 engine.graphicsDevice.SynchronizeWithVerticalRetrace = value;
                 engine.graphicsDevice.ApplyChanges();
             }
+        }
+
+        public void log(string val)
+        {
+            Trace.WriteLine(val);
+        }
+        public void clearlog()
+        {
+            engine.DebugOverlay.Clear();
         }
 
         public bool fullscreen
