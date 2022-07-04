@@ -54,8 +54,8 @@ namespace FRAMEDRAG.Engine
             _console = new DConsole(this);
         }
 
-        public int WindowWidth = 1600;
-        public int WindowHeight = 900;
+        public int VirtualWidth = 800;
+        public int VirtualHeight = 450;
 
         public void LoadImage(string location)
         {
@@ -76,6 +76,7 @@ namespace FRAMEDRAG.Engine
             graphicsDevice.HardwareModeSwitch = true;
             graphicsDevice.GraphicsProfile = GraphicsProfile.HiDef;
             graphicsDevice.SynchronizeWithVerticalRetrace = false;
+            graphicsDevice.ApplyChanges();
             UpdateWindowSize();
 
             IsFixedTimeStep = false;
@@ -83,8 +84,17 @@ namespace FRAMEDRAG.Engine
 
             Stage = new Stage(this);
 
+            PresentationParameters pp = GraphicsDevice.PresentationParameters;
+            GraphicsDevice.PresentationParameters.MultiSampleCount = 0;
+            scene = new RenderTarget2D(GraphicsDevice, VirtualWidth, VirtualHeight, false, SurfaceFormat.Color, DepthFormat.None, pp.MultiSampleCount, RenderTargetUsage.DiscardContents);
+            Window.AllowUserResizing = true;
+
             base.Initialize();
         }
+
+        public Vector2 EngineCursorPosition { get; private set; }
+        public Vector2 WindowCursorPosition { get; private set; }
+
         #region Window Size
         public float WindowRatio
         {
@@ -95,13 +105,13 @@ namespace FRAMEDRAG.Engine
         }
         public void UpdateWindowSize()
         {
-            UpdateWindowSize(WindowWidth, WindowHeight);
+            UpdateWindowSize(0,0);
         }
         public void UpdateWindowSize(int width, int height)
         {
-            graphicsDevice.PreferredBackBufferWidth = width;
+            /*graphicsDevice.PreferredBackBufferWidth = width;
             graphicsDevice.PreferredBackBufferHeight = height;
-            graphicsDevice.ApplyChanges();
+            graphicsDevice.ApplyChanges();*/
         }
         #endregion
         public ResourceManager ResourceMan;
@@ -137,14 +147,63 @@ namespace FRAMEDRAG.Engine
         
         private List<DisplayObject> WalkedObjects = new List<DisplayObject>();
 
+        public float outputAspect
+        {
+            get
+            {
+                return Window.ClientBounds.Width / Window.ClientBounds.Height;
+            }
+        }
+        public float targetAspect
+        {
+            get
+            {
+                return VirtualWidth / VirtualHeight;
+            }
+        }
+
         internal KeyboardState? previousKeyboard = null;
+        private RenderTarget2D scene;
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Attributes.framebuffercolor);
+            GraphicsDevice.SetRenderTarget(scene);
             spriteBatch.Begin(SpriteSortMode.BackToFront);
             Stage.Draw(spriteBatch, this);
             spriteBatch.End();
+
             base.Draw(gameTime);
+
+            float outputAspect = Window.ClientBounds.Width / (float)Window.ClientBounds.Height;
+            float preferredAspect = VirtualWidth / (float)VirtualHeight;
+
+            Rectangle dst;
+
+            if (outputAspect <= preferredAspect)
+            {
+                // output is taller than it is wider, bars on top/bottom
+                int presentHeight = (int)((Window.ClientBounds.Width / preferredAspect) + 0.5f);
+                int barHeight = (Window.ClientBounds.Height - presentHeight) / 2;
+
+                dst = new Rectangle(0, barHeight, Window.ClientBounds.Width, presentHeight);
+            }
+            else
+            {
+                // output is wider than it is tall, bars left/right
+                int presentWidth = (int)((Window.ClientBounds.Height * preferredAspect) + 0.5f);
+                int barWidth = (Window.ClientBounds.Width - presentWidth) / 2;
+
+                dst = new Rectangle(barWidth, 0, presentWidth, Window.ClientBounds.Height);
+            }
+
+            GraphicsDevice.SetRenderTarget(null);
+
+            // clear to get black bars
+            GraphicsDevice.Clear(ClearOptions.Target, Color.Black, 1.0f, 0);
+
+            // draw a quad to get the draw buffer to the back buffer
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque, SamplerState.PointWrap);
+            spriteBatch.Draw(scene, dst, Color.White);
+            spriteBatch.End();
         }
         
         #region Update
