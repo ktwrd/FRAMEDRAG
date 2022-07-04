@@ -140,6 +140,7 @@ namespace FRAMEDRAG.Engine
             Components.Add(DebugOverlay);
 
             ResourceMan.LoadContent();
+            BackgroundTexture = ResourceMan.GetTexture(@"Engine.BuiltinAssets.graygrid");
 
             base.LoadContent();
         }
@@ -202,20 +203,22 @@ namespace FRAMEDRAG.Engine
 
             // draw a quad to get the draw buffer to the back buffer
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque, SamplerState.PointClamp);
-            var tex = ResourceMan.GetTexture(@"Engine.BuiltinAssets.graygrid");
-            if (tex != null)
+
+            // draw background texture
+            if (BackgroundTexture != null)
             {
-                var srcrect = new Rectangle(0, 0, tex.Width, tex.Height);
+                var srcrect = new Rectangle(0, 0, BackgroundTexture.Width, BackgroundTexture.Height);
                 var scale = new Vector2((float)Window.ClientBounds.Width / srcrect.Width, (float)Window.ClientBounds.Height / srcrect.Height);
                 if (scale.X > scale.Y)
                     scale.Y = scale.X;
                 if (scale.Y > scale.X)
                     scale.X = scale.Y;
-                spriteBatch.Draw(tex, Vector2.Zero, srcrect, Color.White, 0, Vector2.Zero, scale, SpriteEffects.None, 0);
+                spriteBatch.Draw(BackgroundTexture, Vector2.Zero, srcrect, Color.White, 0, Vector2.Zero, scale, SpriteEffects.None, 0);
             }
             spriteBatch.Draw(scene, dst, Color.White);
             spriteBatch.End();
         }
+        public Texture2D? BackgroundTexture;
         
         #region Update
         protected override void Update(GameTime gameTime)
