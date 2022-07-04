@@ -118,15 +118,17 @@ namespace FRAMEDRAG.Engine.Display
             var index = Children.IndexOf(child);
             if (index != -1)
             {
-                var childFirst = child.First;
+                /*var childFirst = child.First;
                 var childLast = child.Last;
 
                 var nextObject = childLast._iNext;
                 var previousObject = childFirst._iPrev;
 
                 if (nextObject != null)
+                {
                     nextObject._iPrev = previousObject;
-                previousObject._iNext = nextObject;
+                    previousObject._iNext = nextObject;
+                }
 
                 if (Last == childLast)
                 {
@@ -154,7 +156,7 @@ namespace FRAMEDRAG.Engine.Display
                         tmpChild = tmpChild._iNext;
                     }
                     while (tmpChild != null);
-                }
+                }*/
                 child.Parent = null;
                 Children.RemoveAt(index);
             }
