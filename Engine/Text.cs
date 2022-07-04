@@ -57,6 +57,17 @@ namespace FRAMEDRAG.Engine
             lineWidth = lineWidths.ToArray();
             this.lines = lines;
         }
+        public Vector2 MeasureText()
+        {
+            UpdateText();
+            var size = new Vector2();
+            foreach (var i in lineHeight)
+                size.Y += i;
+            foreach (var i in lineWidth)
+                if (i > size.X)
+                    size.X = i;
+            return size;
+        }
 
         #region Text Drawing
         public Color FontColor = Color.White;
