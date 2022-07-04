@@ -452,7 +452,7 @@ public class ChessActionController
                     isBlocked = true;
             }
 
-            return isBlocked;
+            return !isBlocked;
         }
         
         return false;
