@@ -38,6 +38,7 @@ namespace FRAMEDRAG.Engine
         public EngineGameAttributes Attributes;
 
         public InteractionManager Interaction;
+        internal OnScreenDisplay DebugOverlay;
         public EngineGame()
         {
             Attributes = new EngineGameAttributes(this);
@@ -85,6 +86,13 @@ namespace FRAMEDRAG.Engine
             base.Initialize();
         }
         #region Window Size
+        public float WindowRatio
+        {
+            get
+            {
+                return graphicsDevice.PreferredBackBufferWidth / 900f;
+            }
+        }
         public void UpdateWindowSize()
         {
             UpdateWindowSize(WindowWidth, WindowHeight);
@@ -118,6 +126,10 @@ namespace FRAMEDRAG.Engine
             Interaction = new InteractionManager(this);
             Components.Add(Interaction);
             Components.Add(ResourceMan);
+
+            DebugOverlay = new OnScreenDisplay(this);
+            Components.Add(DebugOverlay);
+
             ResourceMan.LoadContent();
 
             base.LoadContent();
