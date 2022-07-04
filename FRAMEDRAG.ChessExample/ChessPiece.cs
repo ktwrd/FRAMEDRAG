@@ -48,11 +48,15 @@ namespace FRAMEDRAG.ChessExample
             PieceSprite.Scale = new Vector2(ws, hs);
             PieceSprite.ZIndex = 10;
         }
+        public void UpdateSpritePosition()
+        {
+            PieceSprite.Position = LocalPosition();
+        }
 
         public void SetBoardPosition(Vector2 boardPosition)
         {
             BoardPosition = boardPosition;
-            UpdateSprite();
+            UpdateSpritePosition();
         }
         public Vector2 GlobalPosition()
         {
@@ -73,23 +77,25 @@ namespace FRAMEDRAG.ChessExample
         {
             var mpos = Mouse.GetState();
             if (previousMouseState != null && mpos.LeftButton == ButtonState.Released &&
-                previousMouseState.LeftButton == ButtonState.Pressed)
+                previousMouseState.LeftButton == ButtonState.Pressed && Board.MouseDownTile.X >= 0 && Board.MouseDownTile.Y >= 0)
             {
-                var isvalid = Board.Brain.IsMoveValid(this, Board.MouseDownTile, Board.DestinationTile);
-                if (isvalid)
+                if (Board.MouseDownTile == BoardPosition)
                 {
-                    SetBoardPosition(Board.DestinationTile);
-                }
-                Console.WriteLine($"Set Board Position to; {BoardPosition.X}, {BoardPosition.Y}");
+                    var isvalid = Board.Brain.IsMoveValid(this, Board.MouseDownTile, Board.DestinationTile);
+                    if (isvalid)
+                    {
+                        SetBoardPosition(Board.DestinationTile);
+                    }
+                    Console.WriteLine($"Set Board Position to; {BoardPosition.X}, {BoardPosition.Y}");
 
-                FollowMouse = false;
+                    FollowMouse = false;
+                }
             }
 
             previousMouseState = mpos;
         }
         public override void FixedUpdate(GameTime gameTime)
         {
-            var newFollowMouse = false;
             PieceSprite.Position = LocalPosition();
             if (Board.MouseDownTile.X >= 0 && Board.MouseDownTile.Y >= 0)
             {
@@ -107,7 +113,6 @@ namespace FRAMEDRAG.ChessExample
                 {
                     PieceSprite.Position = PieceSprite.GlobalToLocal(new Vector2(mpos.X, mpos.Y)) + LocalPosition();
                 }
-
             }
             base.FixedUpdate(gameTime);
         }
