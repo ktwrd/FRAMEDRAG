@@ -74,11 +74,13 @@ namespace FRAMEDRAG.Engine
     }
     public class CursorOverlay : Component
     {
-        public CursorOverlay(EngineGame engine) : base(engine)
+        public CursorOverlay(EngineGame engine, Stage targetParent) : base(engine)
         {
             SetCursor(EngineCursor.Generate(CursorType.Pointer, engine));
-            engine.Stage.AddChild(container);
+            targetStage = targetParent;
+            targetStage.AddChild(container);
         }
+        private Stage targetStage;
 
         public EngineCursor? Current { get; private set; }
 
