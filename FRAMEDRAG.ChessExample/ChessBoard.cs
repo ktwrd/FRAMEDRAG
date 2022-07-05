@@ -109,11 +109,11 @@ namespace FRAMEDRAG.ChessExample
                 for (int i = 0; i < 8; i++)
                     AddPiece(Piece.Pawn, (PieceTeam)t, new Vector2(i, t == 0 ? 1 : 6));
                 var y = t == 0 ? 0 : 7;
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 2; i++)
                     AddPiece(Piece.Rook, (PieceTeam)t, new Vector2(i == 0 ? 0 : 7, y));
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 2; i++)
                     AddPiece(Piece.Knight, (PieceTeam)t, new Vector2(i == 0 ? 1 : 6, y));
-                for (int i = 0; i < 3; i++)
+                for (int i = 0; i < 2; i++)
                     AddPiece(Piece.Bishop, (PieceTeam)t, new Vector2(i == 0 ? 2 : 5, y));
                 AddPiece(Piece.Queen, (PieceTeam)t, new Vector2(3, y));
                 AddPiece(Piece.King, (PieceTeam)t, new Vector2(4, y));
