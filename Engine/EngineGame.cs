@@ -171,14 +171,15 @@ namespace FRAMEDRAG.Engine
             }
         }
 
+        public Vector2 ScaledMousePosition = Vector2.Zero;
+        public Vector2 ScaledMousePositionPrevious = Vector2.Zero;
+
         internal KeyboardState? previousKeyboard = null;
         private RenderTarget2D scene;
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.SetRenderTarget(scene);
-            spriteBatch.Begin(SpriteSortMode.BackToFront);
             Stage.Draw(spriteBatch, this);
-            spriteBatch.End();
 
             base.Draw(gameTime);
 
@@ -203,6 +204,9 @@ namespace FRAMEDRAG.Engine
 
                 dst = new Rectangle(barWidth, 0, presentWidth, Window.ClientBounds.Height);
             }
+            var currentMouse = Mouse.GetState();
+            ScaledMousePosition.X = (currentMouse.X - dst.X) * (VirtualWidth / (float)Window.ClientBounds.Width);
+            ScaledMousePosition.Y = (currentMouse.Y - dst.Y) * (VirtualHeight / (float)Window.ClientBounds.Height);
 
             GraphicsDevice.SetRenderTarget(null);
 
