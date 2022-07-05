@@ -29,7 +29,7 @@ namespace FRAMEDRAG.Engine
             Trace.Listeners.Add(listener);
             this.Container = new Container();
             this.Container.ZIndex = int.MaxValue - 10;
-            Engine.Stage.AddChild(Container);
+            Engine.OverlayStage.AddChild(Container);
         }
         internal bool Visible { get; set; }
         internal void ToggleShow()
@@ -37,7 +37,7 @@ namespace FRAMEDRAG.Engine
             Visible = !Visible;
 /*            NotificationManager.ShowMessage("Debug messages are now " + (Visible ? "visible" : "hidden") + ". Press F11 to toggle.");*/
         }
-        private Container? Container;
+        internal Container? Container;
 
         public override void Update(GameTime gameTime)
         {
@@ -63,11 +63,12 @@ namespace FRAMEDRAG.Engine
                 });
 
                 //Remove any sprites above the screen
-                if (Container?.Children.Count > 0 && Container?.Children[0].Position.Y < (Engine.graphicsDevice.PreferredBackBufferHeight / 2))
+                if (Container?.Children.Count > 0 && Container?.Children[0].Position.Y < (Engine.Window.ClientBounds.Height / 2f))
                     Container?.RemoveChild(Container.Children[0]);
                 Container?.AddChild(text);
                 text.Position.X = 0;
-                text.Position.Y = Engine.graphicsDevice.PreferredBackBufferHeight - txtSize.Y;
+                
+                text.Position.Y = Engine.Window.ClientBounds.Height - txtSize.Y;
             }
             base.Update(gameTime);
         }
