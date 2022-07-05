@@ -14,6 +14,13 @@ using System.Threading.Tasks;
 
 namespace FRAMEDRAG.Engine
 {
+    public enum TextureDrawMode
+    {
+        Repeat,
+        Stretch,
+        Fit,
+        Single
+    }
     public class EngineGame : Game
     {
         public SpriteFont DefaultFont;
@@ -207,20 +214,91 @@ namespace FRAMEDRAG.Engine
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque, SamplerState.PointClamp);
 
             // draw background texture
-            if (BackgroundTexture != null)
-            {
-                var srcrect = new Rectangle(0, 0, BackgroundTexture.Width, BackgroundTexture.Height);
-                var scale = new Vector2((float)Window.ClientBounds.Width / srcrect.Width, (float)Window.ClientBounds.Height / srcrect.Height);
-                if (scale.X > scale.Y)
-                    scale.Y = scale.X;
-                if (scale.Y > scale.X)
-                    scale.X = scale.Y;
-                spriteBatch.Draw(BackgroundTexture, Vector2.Zero, srcrect, Color.White, 0, Vector2.Zero, scale, SpriteEffects.None, 0);
-            }
+            DrawBackground();
+            /* if (BackgroundTexture != null)
+             {
+                 var srcrect = new Rectangle(0, 0, BackgroundTexture.Width, BackgroundTexture.Height);
+                 var scale = new Vector2((float)Window.ClientBounds.Width / srcrect.Width, (float)Window.ClientBounds.Height / srcrect.Height);
+                 if (scale.X > scale.Y)
+                     scale.Y = scale.X;
+                 if (scale.Y > scale.X)
+                     scale.X = scale.Y;
+                 spriteBatch.Draw(BackgroundTexture, Vector2.Zero, srcrect, Color.White, 0, Vector2.Zero, scale, SpriteEffects.None, 0);
+             }*/
             spriteBatch.Draw(scene, dst, Color.White);
             OverlayStage.Draw(spriteBatch, this);
             spriteBatch.End();
         }
+        internal void DrawBackground()
+        {
+            if (BackgroundTexture == null)
+                return;
+            var srcRectangle = new Rectangle(0, 0, BackgroundTexture.Width, BackgroundTexture.Height);
+
+            var position = Vector2.Zero;
+            var scale = Vector2.One;
+            if (BackgroundTextureDrawMode == TextureDrawMode.Stretch)
+            {
+                scale.X = (float)Window.ClientBounds.Width / srcRectangle.Width;
+                scale.Y = (float)Window.ClientBounds.Height / srcRectangle.Height;
+                position = Vector2.Zero;
+                spriteBatch.Draw(BackgroundTexture, position, srcRectangle, Color.White, 0, Vector2.Zero, scale, SpriteEffects.None, 0);
+            }
+            else if (BackgroundTextureDrawMode == TextureDrawMode.Fit)
+            {
+                scale.X = (float)Window.ClientBounds.Width / srcRectangle.Width;
+                scale.Y = (float)Window.ClientBounds.Height / srcRectangle.Height;
+                if (scale.X > scale.Y)
+                    scale.Y = scale.X;
+                if (scale.Y > scale.X)
+                    scale.X = scale.Y;
+                position = Vector2.Zero;
+                spriteBatch.Draw(BackgroundTexture, position, srcRectangle, Color.White, 0, Vector2.Zero, scale, SpriteEffects.None, 0);
+            }
+            else if  (BackgroundTextureDrawMode == TextureDrawMode.Repeat)
+            {
+                double og_sx = (float)Window.ClientBounds.Width / srcRectangle.Width;
+                double og_sy = (float)Window.ClientBounds.Height / srcRectangle.Height;
+
+                double sy;
+                double sx;
+                if (og_sx > og_sy)
+                {
+                    sx = og_sx;
+                    sy = og_sx;
+                }
+                else
+                {
+                    sx = og_sy;
+                    sy = og_sy;
+                }
+
+                double repeatXCount = Math.Ceiling(sx);
+                double repeatYCount = Math.Ceiling(sy);
+                for (int x = 0; x < repeatXCount; x++)
+                {
+                    for (int y = 0; y < repeatYCount; y++)
+                    {
+                        Vector2 targetPosition = new Vector2((float)BackgroundTexture.Width * x, (float)BackgroundTexture.Height * y);
+                        spriteBatch.Draw(
+                            BackgroundTexture,
+                            targetPosition,
+                            srcRectangle,
+                            Color.White,
+                            0,
+                            Vector2.Zero,
+                            scale,
+                            SpriteEffects.None,
+                            0);
+                    }
+                }
+            }
+            else
+            {
+                spriteBatch.Draw(BackgroundTexture, position, srcRectangle, Color.White, 0, Vector2.Zero, scale, SpriteEffects.None, 0);
+            }
+        }
+        public TextureDrawMode BackgroundTextureDrawMode = TextureDrawMode.Repeat;
         public Texture2D? BackgroundTexture;
         
         #region Update
