@@ -139,7 +139,8 @@ namespace FRAMEDRAG.Engine
             spriteBatch = new SpriteBatch(GraphicsDevice);
             ResourceMan = new ResourceManager(this);
 
-            Components.Add(new CursorOverlay(this));
+            Components.Add(new CursorOverlay(this, Stage));
+            Components.Add(new CursorOverlay(this, OverlayStage));
             Components.Add(new StatsOverlay(this));
             Interaction = new InteractionManager(this);
             Components.Add(Interaction);
@@ -214,24 +215,18 @@ namespace FRAMEDRAG.Engine
             // clear to get black bars
             GraphicsDevice.Clear(ClearOptions.Target, Color.Black, 1.0f, 0);
 
-            // draw a quad to get the draw buffer to the back buffer
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque, SamplerState.PointClamp);
-
+            spriteBatch.Begin(SpriteSortMode.BackToFront);
             // draw background texture
             DrawBackground();
-            /* if (BackgroundTexture != null)
-             {
-                 var srcrect = new Rectangle(0, 0, BackgroundTexture.Width, BackgroundTexture.Height);
-                 var scale = new Vector2((float)Window.ClientBounds.Width / srcrect.Width, (float)Window.ClientBounds.Height / srcrect.Height);
-                 if (scale.X > scale.Y)
-                     scale.Y = scale.X;
-                 if (scale.Y > scale.X)
-                     scale.X = scale.Y;
-                 spriteBatch.Draw(BackgroundTexture, Vector2.Zero, srcrect, Color.White, 0, Vector2.Zero, scale, SpriteEffects.None, 0);
-             }*/
-            spriteBatch.Draw(scene, dst, Color.White);
-            OverlayStage.Draw(spriteBatch, this);
             spriteBatch.End();
+            // draw a quad to get the draw buffer to the back buffer
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque, SamplerState.PointClamp);
+            // scaled output
+            spriteBatch.Draw(scene, dst, Color.White);
+            // overlay
+            spriteBatch.End();
+            OverlayStage.Draw(spriteBatch, this);
+            ScaledMousePositionPrevious = ScaledMousePosition;
         }
         internal void DrawBackground()
         {
