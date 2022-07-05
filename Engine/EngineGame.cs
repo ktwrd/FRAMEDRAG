@@ -33,6 +33,7 @@ namespace FRAMEDRAG.Engine
         public Dictionary<string, Texture2D> TextureCache;
 
         public Stage Stage;
+        public Stage OverlayStage;
 
         public int ClientShowFPS = 0;
         public EngineGameAttributes Attributes;
@@ -83,6 +84,7 @@ namespace FRAMEDRAG.Engine
             TargetElapsedTime = TimeSpan.FromSeconds(1f / TargetFramerate);
 
             Stage = new Stage(this);
+            OverlayStage = new Stage(this);
 
             PresentationParameters pp = GraphicsDevice.PresentationParameters;
             scene = new RenderTarget2D(GraphicsDevice, VirtualWidth, VirtualHeight, false, SurfaceFormat.Color, DepthFormat.None, pp.MultiSampleCount, RenderTargetUsage.DiscardContents);
@@ -216,6 +218,7 @@ namespace FRAMEDRAG.Engine
                 spriteBatch.Draw(BackgroundTexture, Vector2.Zero, srcrect, Color.White, 0, Vector2.Zero, scale, SpriteEffects.None, 0);
             }
             spriteBatch.Draw(scene, dst, Color.White);
+            OverlayStage.Draw(spriteBatch, this);
             spriteBatch.End();
         }
         public Texture2D? BackgroundTexture;
