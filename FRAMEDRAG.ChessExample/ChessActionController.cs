@@ -27,6 +27,7 @@ public class ChessActionController
         Board = board;
     }
 
+    #region bloat
     public Dictionary<Piece, Vector2[]> PieceOffsets = new Dictionary<Piece, Vector2[]>()
     {
         {
@@ -405,6 +406,7 @@ public class ChessActionController
             }
         }
     };
+    #endregion
     public bool IsMoveValid(ChessPiece piece, Vector2 from, Vector2 to)
     {
         ChessPiece? currentKing = null;
