@@ -172,11 +172,28 @@ namespace FRAMEDRAG.Engine
             }
         }
 
+        public Vector2 EngineToScreen(Vector2 engineLocation)
+        {
+            var scaledStageScreenSize = new Vector2(
+                StageScreenSize.X / (float)VirtualWidth,
+                StageScreenSize.Y / (float)VirtualHeight);
+            return engineLocation * scaledStageScreenSize;
+        }
+        public Vector2 ScreenToEngine(Vector2 screenLocation)
+        {
+            var scaledStageScreenSize = new Vector2(
+                VirtualWidth / (float)StageScreenSize.X,
+                VirtualHeight / (float)StageScreenSize.Y);
+            return screenLocation * scaledStageScreenSize;
+        }
+
         public Vector2 ScaledMousePosition = Vector2.Zero;
         public Vector2 ScaledMousePositionPrevious = Vector2.Zero;
 
         internal KeyboardState? previousKeyboard = null;
         private RenderTarget2D scene;
+        private Vector2 StageScreenPosition = Vector2.Zero;
+        private Vector2 StageScreenSize = Vector2.Zero;
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.SetRenderTarget(scene);
@@ -205,9 +222,12 @@ namespace FRAMEDRAG.Engine
 
                 dst = new Rectangle(barWidth, 0, presentWidth, Window.ClientBounds.Height);
             }
+            StageScreenPosition.X = dst.X;
+            StageScreenPosition.Y = dst.Y;
+            StageScreenSize.X = dst.Width;
+            StageScreenSize.Y = dst.Height;
             var currentMouse = Mouse.GetState();
-            ScaledMousePosition.X = (currentMouse.X - dst.X) * (VirtualWidth / (float)Window.ClientBounds.Width);
-            ScaledMousePosition.Y = (currentMouse.Y - dst.Y) * (VirtualHeight / (float)Window.ClientBounds.Height);
+            ScaledMousePosition = ScreenToEngine(new Vector2(currentMouse.Position.X - dst.X, currentMouse.Position.Y - dst.Y));
 
             GraphicsDevice.SetRenderTarget(null);
 
