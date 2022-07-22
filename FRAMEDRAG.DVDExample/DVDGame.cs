@@ -17,8 +17,8 @@ namespace FRAMEDRAG.DVDExample
         public DVDGame()
             :base()
         {
-            WindowWidth = 1280;
-            WindowHeight = 720;
+            VirtualWidth = 1280;
+            VirtualHeight = 720;
         }
         protected override void Initialize()
         {
@@ -36,27 +36,19 @@ namespace FRAMEDRAG.DVDExample
         }
         protected override void LoadContent()
         {
+            base.LoadContent();
 
             countText = new Text($@"Count: {spritecount}", DefaultFont);
             countText.Position.X = 300;
             countText.ZIndex = int.MaxValue;
             Stage.AddChild(countText);
-
-
-            var gif = AnimatedSprite.GIFFromStream(GetStream(@"C:\Work\Gamedev\FrameDrag\FRAMEDRAG.DVDExample\gif-resized.gif"), this);
-            Stage.AddChild(gif);
-
-            base.LoadContent();
         }
         private Text countText;
         private int spritecount = 0;
         private int currentTextureIndex = 0;
         private void AddSpriteThing()
         {
-            var testTexture = new Texture(TextureCache.ToArray()[currentTextureIndex].Value);
-            currentTextureIndex++;
-            if (currentTextureIndex >= TextureCache.Count)
-                currentTextureIndex = 0;
+            var testTexture = new Texture(ResourceMan.GetTexture(@"Engine.BuiltinAssets.logo"));
             var testSprite = new DVDSprite(testTexture);
             testSprite.Scale.X = 200f / testTexture.Width;
             testSprite.Scale.Y = 200f / testTexture.Height;
