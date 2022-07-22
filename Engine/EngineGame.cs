@@ -192,8 +192,8 @@ namespace FRAMEDRAG.Engine
 
         internal KeyboardState? previousKeyboard = null;
         private RenderTarget2D scene;
-        private Vector2 StageScreenPosition = Vector2.Zero;
-        private Vector2 StageScreenSize = Vector2.Zero;
+        public Vector2 StageScreenPosition = Vector2.Zero;
+        public Vector2 StageScreenSize = Vector2.Zero;
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.SetRenderTarget(scene);
