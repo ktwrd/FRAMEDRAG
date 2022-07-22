@@ -407,6 +407,7 @@ public class ChessActionController
         }
     };
     #endregion
+    
     public bool IsMoveValid(ChessPiece piece, Vector2 from, Vector2 to)
     {
         ChessPiece? currentKing = null;
@@ -427,9 +428,22 @@ public class ChessActionController
         {
             var existsInTable = false;
             var existsList = new List<Vector2>();
+            Piece[] invertPieceArr = new Piece[]
+            {
+                Piece.Pawn,
+            };
             foreach (var item in PieceOffsets[piece.PieceType])
             {
-                var target = item + from;
+                Vector2 target = Vector2.Zero;
+                // Invert Y
+                if (invertPieceArr.Contains(piece.PieceType) && piece.Team == PieceTeam.White)
+                {
+                    target = new Vector2(
+                        item.X + from.X,
+                        from.Y - item.Y);
+                }
+                else
+                    target = item + from;
                 if (to == target)
                 {
                     existsInTable = true;
