@@ -151,17 +151,13 @@ namespace FRAMEDRAG.ChessExample
             var cglobal = ChessContainer.GlobalPosition();
             if (previousMouseState != null)
             {
-                if (mstate.Position.X > cglobal.X && mstate.Position.X < cglobal.X + size)
-                    if (mstate.Position.Y > cglobal.Y && mstate.Position.Y < cglobal.Y + size)
+                if (Game.ScaledMousePosition.X > cglobal.X && Game.ScaledMousePosition.X < cglobal.X + size)
+                    if (Game.ScaledMousePosition.Y > cglobal.Y && Game.ScaledMousePosition.Y < cglobal.Y + size)
                     {
-                        HoveredTile.X = (float)Math.Floor((mstate.Position.X - cglobal.X) / ChessPieceSize);
-                        HoveredTile.Y = (float)Math.Floor((mstate.Position.Y - cglobal.Y) / ChessPieceSize);
+                        HoveredTile.X = (float)Math.Floor((Game.ScaledMousePosition.X - cglobal.X) / ChessPieceSize);
+                        HoveredTile.Y = (float)Math.Floor((Game.ScaledMousePosition.Y - cglobal.Y) / ChessPieceSize);
                     }
                 CheckTileSelection(gameTime, mstate);
-            }
-            if (previousKeyboardState != null)
-            {
-
             }
 
             previousKeyboardState = kstate;
