@@ -111,7 +111,7 @@ namespace FRAMEDRAG.ChessExample
                 var mpos = Mouse.GetState();
                 if (FollowMouse)
                 {
-                    PieceSprite.Position = PieceSprite.GlobalToLocal(new Vector2(mpos.X, mpos.Y)) + LocalPosition();
+                    PieceSprite.Position = PieceSprite.GlobalToLocal(new Vector2(Game.ScaledMousePosition.X, Game.ScaledMousePosition.Y)) + LocalPosition();
                 }
             }
             base.FixedUpdate(gameTime);
