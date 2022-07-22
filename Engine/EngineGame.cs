@@ -139,7 +139,7 @@ namespace FRAMEDRAG.Engine
             spriteBatch = new SpriteBatch(GraphicsDevice);
             ResourceMan = new ResourceManager(this);
 
-            Components.Add(new CursorOverlay(this, Stage));
+            /*Components.Add(new CursorOverlay(this, Stage));*/
             Components.Add(new CursorOverlay(this, OverlayStage));
             Components.Add(new StatsOverlay(this));
             Interaction = new InteractionManager(this);
