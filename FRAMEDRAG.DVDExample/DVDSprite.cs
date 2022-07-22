@@ -22,12 +22,12 @@ namespace FRAMEDRAG.DVDExample
         {
             if (Position.X <= 1)
                 change.X = 1f;
-            else if (Position.X + Width >= engine.graphicsDevice.PreferredBackBufferWidth)
+            else if (Position.X + Width >= engine.VirtualWidth)
                 change.X = -1f;
 
             if (Position.Y <= 1)
                 change.Y = 1f;
-            else if (Position.Y + Height >= engine.graphicsDevice.PreferredBackBufferHeight)
+            else if (Position.Y + Height >= engine.VirtualHeight)
                 change.Y = -1f;
 
             Position += change;
