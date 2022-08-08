@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
     <StartupObject>FRAMEDRAG.ChessExample.MainClass</StartupObject>
+	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 
   <ItemGroup>
