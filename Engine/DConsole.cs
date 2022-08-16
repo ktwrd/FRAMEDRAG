@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace FRAMEDRAG.Engine
 {
-    internal class DConsole
+    public class DConsole
     {
         private EngineGame Engine;
-        private ConsoleComponent qConsole
+        public ConsoleComponent qConsole
         {
             get
             {
@@ -23,8 +23,8 @@ namespace FRAMEDRAG.Engine
             }
         }
 
-        internal PythonInterpreter Interpreter;
-        internal DConsole(EngineGame engine)
+        public PythonInterpreter Interpreter;
+        public DConsole(EngineGame engine)
         {
             Engine = engine;
 
@@ -32,7 +32,7 @@ namespace FRAMEDRAG.Engine
             InitalizeValues();
             Engine.qConsole.Interpreter = Interpreter;
         }
-        internal void InitalizeValues()
+        public void InitalizeValues()
         {
             Interpreter.AddVariable(@"engine", Engine.Attributes);
             Interpreter.AddType(typeof(Color));
