@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FRAMEDRAG.Engine.Display;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ namespace FRAMEDRAG.Engine
             : base(game)
         {
             Game = game;
+            Game.MouseDownEvent += MouseDown;
+            Game.MouseUpEvent += MouseUp;
         }
         public new EngineGame Game;
         public virtual void Draw(GameTime gameTime)
@@ -23,6 +26,11 @@ namespace FRAMEDRAG.Engine
         public virtual void FixedFastUpdate(GameTime gameTime)
         { }
         public virtual void DrawSprite(SpriteBatch spriteBatch)
+        { }
+
+        public virtual void MouseDown(Vector2 position, MouseButton button)
+        { }
+        public virtual void MouseUp(Vector2 position, MouseButton button)
         { }
     }
 }
