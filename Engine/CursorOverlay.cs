@@ -96,8 +96,8 @@ namespace FRAMEDRAG.Engine
         public override void Update(GameTime gameTime)
         {
             var mouseState = Mouse.GetState();
-            Current.Sprite.Position.X = mouseState.X;
-            Current.Sprite.Position.Y = mouseState.Y;
+            Current.Sprite.Position.X = mouseState.X - 4;
+            Current.Sprite.Position.Y = mouseState.Y - 5;
             base.Update(gameTime);
         }
     }
