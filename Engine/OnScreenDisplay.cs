@@ -29,7 +29,7 @@ namespace FRAMEDRAG.Engine
             Trace.Listeners.Add(listener);
             this.Container = new Container();
             this.Container.ZIndex = int.MaxValue - 10;
-            Engine.OverlayStage.AddChild(Container);
+            Engine.GetTargetCursorStage().AddChild(Container);
         }
         internal bool Visible { get; set; }
         internal void ToggleShow()
