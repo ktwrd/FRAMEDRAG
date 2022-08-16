@@ -21,6 +21,7 @@ namespace FRAMEDRAG.Engine
         Fit,
         Single
     }
+    public delegate void MouseDelegate(Vector2 position, MouseButton button);
     public class EngineGame : Game
     {
         public SpriteFont DefaultFont;
@@ -35,18 +36,24 @@ namespace FRAMEDRAG.Engine
         public float MouseSensitivity = 6f;
 
         public ConsoleComponent qConsole;
-        internal DConsole _console;
+        public DConsole _console;
 
         public Dictionary<string, Texture2D> TextureCache;
 
         public Stage Stage;
-        public Stage OverlayStage;
 
         public int ClientShowFPS = 0;
         public EngineGameAttributes Attributes;
 
         public InteractionManager Interaction;
         internal OnScreenDisplay DebugOverlay;
+
+        public event MouseDelegate MouseDownEvent;
+        public event MouseDelegate MouseUpEvent;
+
+        protected virtual void OnMouseDown(Vector2 position, MouseButton button) => MouseDownEvent?.Invoke(position, button);
+        protected virtual void OnMouseUp(Vector2 position, MouseButton button) => MouseUpEvent?.Invoke(position, button);
+
         public EngineGame()
         {
             Attributes = new EngineGameAttributes(this);
@@ -91,10 +98,7 @@ namespace FRAMEDRAG.Engine
             TargetElapsedTime = TimeSpan.FromSeconds(1f / TargetFramerate);
 
             Stage = new Stage(this);
-            OverlayStage = new Stage(this);
 
-            PresentationParameters pp = GraphicsDevice.PresentationParameters;
-            scene = new RenderTarget2D(GraphicsDevice, VirtualWidth, VirtualHeight, false, SurfaceFormat.Color, DepthFormat.None, pp.MultiSampleCount, RenderTargetUsage.DiscardContents);
             Window.AllowUserResizing = true;
 
             base.Initialize();
@@ -112,8 +116,6 @@ namespace FRAMEDRAG.Engine
         {
             VirtualWidth = width;
             VirtualHeight = height;
-            PresentationParameters pp = GraphicsDevice.PresentationParameters;
-            scene = new RenderTarget2D(GraphicsDevice, VirtualWidth, VirtualHeight, false, SurfaceFormat.Color, DepthFormat.None, pp.MultiSampleCount, RenderTargetUsage.DiscardContents);
         }
         public void RestoreWindowSize()
         {
@@ -122,6 +124,8 @@ namespace FRAMEDRAG.Engine
             graphicsDevice.ApplyChanges();
         }
         #endregion
+        protected virtual Stage TargetCursorStage() => this.Stage;
+        public Stage GetTargetCursorStage() => TargetCursorStage();
         public ResourceManager ResourceMan;
         protected override void LoadContent()
         {
@@ -140,7 +144,7 @@ namespace FRAMEDRAG.Engine
             ResourceMan = new ResourceManager(this);
 
             /*Components.Add(new CursorOverlay(this, Stage));*/
-            Components.Add(new CursorOverlay(this, OverlayStage));
+            Components.Add(new CursorOverlay(this, TargetCursorStage()));
             Components.Add(new StatsOverlay(this));
             Interaction = new InteractionManager(this);
             Components.Add(Interaction);
@@ -150,7 +154,6 @@ namespace FRAMEDRAG.Engine
             Components.Add(DebugOverlay);
 
             ResourceMan.LoadContent();
-            BackgroundTexture = ResourceMan.GetTexture(@"Engine.BuiltinAssets.graygrid");
 
             base.LoadContent();
         }
@@ -191,134 +194,19 @@ namespace FRAMEDRAG.Engine
         public Vector2 ScaledMousePositionPrevious = Vector2.Zero;
 
         internal KeyboardState? previousKeyboard = null;
-        private RenderTarget2D scene;
+        internal MouseState? previousMouse = null;
         public Vector2 StageScreenPosition = Vector2.Zero;
         public Vector2 StageScreenSize = Vector2.Zero;
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.SetRenderTarget(scene);
+            GraphicsDevice.Clear(Color.Black);
             Stage.Draw(spriteBatch, this);
 
+
             base.Draw(gameTime);
-
-            float outputAspect = Window.ClientBounds.Width / (float)Window.ClientBounds.Height;
-            float preferredAspect = VirtualWidth / (float)VirtualHeight;
-
-            Rectangle dst;
-
-            if (outputAspect <= preferredAspect)
-            {
-                // output is taller than it is wider, bars on top/bottom
-                int presentHeight = (int)((Window.ClientBounds.Width / preferredAspect) + 0.5f);
-                int barHeight = (Window.ClientBounds.Height - presentHeight) / 2;
-
-                dst = new Rectangle(0, barHeight, Window.ClientBounds.Width, presentHeight);
-            }
-            else
-            {
-                // output is wider than it is tall, bars left/right
-                int presentWidth = (int)((Window.ClientBounds.Height * preferredAspect) + 0.5f);
-                int barWidth = (Window.ClientBounds.Width - presentWidth) / 2;
-
-                dst = new Rectangle(barWidth, 0, presentWidth, Window.ClientBounds.Height);
-            }
-            StageScreenPosition.X = dst.X;
-            StageScreenPosition.Y = dst.Y;
-            StageScreenSize.X = dst.Width;
-            StageScreenSize.Y = dst.Height;
-            var currentMouse = Mouse.GetState();
-            ScaledMousePosition = ScreenToEngine(new Vector2(currentMouse.Position.X - dst.X, currentMouse.Position.Y - dst.Y));
-
-            GraphicsDevice.SetRenderTarget(null);
-
-
-            // clear to get black bars
-            GraphicsDevice.Clear(ClearOptions.Target, Color.Black, 1.0f, 0);
-
-            spriteBatch.Begin(SpriteSortMode.BackToFront);
-            // draw background texture
-            DrawBackground();
-            spriteBatch.End();
-            // draw a quad to get the draw buffer to the back buffer
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.Opaque, SamplerState.PointClamp);
-            // scaled output
-            spriteBatch.Draw(scene, dst, Color.White);
-            // overlay
-            spriteBatch.End();
-            OverlayStage.Draw(spriteBatch, this);
-            ScaledMousePositionPrevious = ScaledMousePosition;
         }
-        internal void DrawBackground()
-        {
-            if (BackgroundTexture == null)
-                return;
-            var srcRectangle = new Rectangle(0, 0, BackgroundTexture.Width, BackgroundTexture.Height);
-
-            var position = Vector2.Zero;
-            var scale = Vector2.One;
-            if (BackgroundTextureDrawMode == TextureDrawMode.Stretch)
-            {
-                scale.X = (float)Window.ClientBounds.Width / srcRectangle.Width;
-                scale.Y = (float)Window.ClientBounds.Height / srcRectangle.Height;
-                position = Vector2.Zero;
-                spriteBatch.Draw(BackgroundTexture, position, srcRectangle, Color.White, 0, Vector2.Zero, scale, SpriteEffects.None, 0);
-            }
-            else if (BackgroundTextureDrawMode == TextureDrawMode.Fit)
-            {
-                scale.X = (float)Window.ClientBounds.Width / srcRectangle.Width;
-                scale.Y = (float)Window.ClientBounds.Height / srcRectangle.Height;
-                if (scale.X > scale.Y)
-                    scale.Y = scale.X;
-                if (scale.Y > scale.X)
-                    scale.X = scale.Y;
-                position = Vector2.Zero;
-                spriteBatch.Draw(BackgroundTexture, position, srcRectangle, Color.White, 0, Vector2.Zero, scale, SpriteEffects.None, 0);
-            }
-            else if  (BackgroundTextureDrawMode == TextureDrawMode.Repeat)
-            {
-                double og_sx = (float)Window.ClientBounds.Width / srcRectangle.Width;
-                double og_sy = (float)Window.ClientBounds.Height / srcRectangle.Height;
-
-                double sy;
-                double sx;
-                if (og_sx > og_sy)
-                {
-                    sx = og_sx;
-                    sy = og_sx;
-                }
-                else
-                {
-                    sx = og_sy;
-                    sy = og_sy;
-                }
-
-                double repeatXCount = Math.Ceiling(sx);
-                double repeatYCount = Math.Ceiling(sy);
-                for (int x = 0; x < repeatXCount; x++)
-                {
-                    for (int y = 0; y < repeatYCount; y++)
-                    {
-                        Vector2 targetPosition = new Vector2((float)BackgroundTexture.Width * x, (float)BackgroundTexture.Height * y);
-                        spriteBatch.Draw(
-                            BackgroundTexture,
-                            targetPosition,
-                            srcRectangle,
-                            Color.White,
-                            0,
-                            Vector2.Zero,
-                            scale,
-                            SpriteEffects.None,
-                            0);
-                    }
-                }
-            }
-            else
-            {
-                spriteBatch.Draw(BackgroundTexture, position, srcRectangle, Color.White, 0, Vector2.Zero, scale, SpriteEffects.None, 0);
-            }
-        }
-        public TextureDrawMode BackgroundTextureDrawMode = TextureDrawMode.Repeat;
-        public Texture2D? BackgroundTexture;
+        protected void BaseDraw(GameTime gameTime) => base.Draw(gameTime);
+        
         
         #region Update
         protected override void Update(GameTime gameTime)
@@ -333,6 +221,7 @@ namespace FRAMEDRAG.Engine
             }
 
             var keyboard = Keyboard.GetState();
+            var mouse = Mouse.GetState();
             if (previousKeyboard != null)
             {
                 if ((bool)previousKeyboard?.IsKeyUp(Keys.OemTilde) && keyboard.IsKeyDown(Keys.OemTilde))
@@ -341,6 +230,36 @@ namespace FRAMEDRAG.Engine
                 }
             }
 
+            if (mouse.LeftButton == ButtonState.Pressed)
+            {
+                OnMouseDown(ScaledMousePosition, MouseButton.Left);
+            }
+            else if (mouse.LeftButton == ButtonState.Released && previousMouse?.LeftButton == ButtonState.Pressed)
+            {
+                OnMouseUp(ScaledMousePosition, MouseButton.Left);
+            }
+
+            if (mouse.MiddleButton == ButtonState.Pressed)
+            {
+                OnMouseDown(ScaledMousePosition, MouseButton.Middle);
+            }
+            else if (mouse.MiddleButton == ButtonState.Released && previousMouse?.MiddleButton == ButtonState.Pressed)
+            {
+                OnMouseUp(ScaledMousePosition, MouseButton.Middle);
+            }
+            if (mouse.RightButton == ButtonState.Pressed)
+            {
+                OnMouseDown(ScaledMousePosition, MouseButton.Right);
+            }
+            else if (mouse.RightButton == ButtonState.Released && previousMouse?.RightButton == ButtonState.Pressed)
+            {
+                OnMouseUp(ScaledMousePosition, MouseButton.Right);
+            }
+            ScaledMousePosition = new Vector2(mouse.Position.X, mouse.Position.Y);
+            ScaledMousePositionPrevious = new Vector2(previousMouse?.Position.X ?? 0f, previousMouse?.Position.Y ?? 0f);
+
+
+            previousMouse = mouse;
             previousKeyboard = keyboard;
 
             base.Update(gameTime);
