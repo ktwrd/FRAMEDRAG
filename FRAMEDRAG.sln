@@ -11,7 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FRAMEDRAG.UIExample", "FRAM
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{269CEEB8-6E53-4709-BF31-A6CC172FF05C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FRAMEDRAG.ChessExample", "FRAMEDRAG.ChessExample\FRAMEDRAG.ChessExample.csproj", "{09AE3955-4C22-4466-8E55-673FFAD7FCB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FRAMEDRAG.ChessExample", "FRAMEDRAG.ChessExample\FRAMEDRAG.ChessExample.csproj", "{09AE3955-4C22-4466-8E55-673FFAD7FCB0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FRAMEDRAG.Engine.DX", "FRAMEDRAG.Engine.DX\FRAMEDRAG.Engine.DX.csproj", "{1C4DCAA9-C3A4-40BD-B4DC-3069C9ADEA5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FRAMEDRAG.Engine.GL", "FRAMEDRAG.Engine.GL\FRAMEDRAG.Engine.GL.csproj", "{E0773DD8-6136-4E35-B6E9-7F54A5ECB93D}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "FRAMEDRAG.Engine.Shared", "FRAMEDRAG.Engine.Shared\FRAMEDRAG.Engine.Shared.shproj", "{0D394F80-E812-4F06-9559-A5475194BBFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +41,14 @@ Global
 		{09AE3955-4C22-4466-8E55-673FFAD7FCB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09AE3955-4C22-4466-8E55-673FFAD7FCB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09AE3955-4C22-4466-8E55-673FFAD7FCB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C4DCAA9-C3A4-40BD-B4DC-3069C9ADEA5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C4DCAA9-C3A4-40BD-B4DC-3069C9ADEA5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C4DCAA9-C3A4-40BD-B4DC-3069C9ADEA5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C4DCAA9-C3A4-40BD-B4DC-3069C9ADEA5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0773DD8-6136-4E35-B6E9-7F54A5ECB93D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0773DD8-6136-4E35-B6E9-7F54A5ECB93D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0773DD8-6136-4E35-B6E9-7F54A5ECB93D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0773DD8-6136-4E35-B6E9-7F54A5ECB93D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,5 +60,10 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6D2BF0A8-BA2F-4987-9A12-8C473DC7BBE1}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		FRAMEDRAG.Engine.Shared\FRAMEDRAG.Engine.Shared.projitems*{0d394f80-e812-4f06-9559-a5475194bbfa}*SharedItemsImports = 13
+		FRAMEDRAG.Engine.Shared\FRAMEDRAG.Engine.Shared.projitems*{1c4dcaa9-c3a4-40bd-b4dc-3069c9adea5e}*SharedItemsImports = 5
+		FRAMEDRAG.Engine.Shared\FRAMEDRAG.Engine.Shared.projitems*{e0773dd8-6136-4e35-b6e9-7f54a5ecb93d}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal
