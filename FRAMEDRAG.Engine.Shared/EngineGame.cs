@@ -203,8 +203,8 @@ namespace FRAMEDRAG.Engine
         public Vector2 ScaledMousePosition = Vector2.Zero;
         public Vector2 ScaledMousePositionPrevious = Vector2.Zero;
 
-        internal KeyboardState? previousKeyboard = null;
-        internal MouseState? previousMouse = null;
+        protected KeyboardState? previousKeyboard = null;
+        protected MouseState? previousMouse = null;
         public Vector2 StageScreenPosition = Vector2.Zero;
         public Vector2 StageScreenSize = Vector2.Zero;
         protected override void Draw(GameTime gameTime)
