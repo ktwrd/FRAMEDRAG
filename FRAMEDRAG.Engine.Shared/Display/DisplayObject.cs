@@ -22,6 +22,10 @@ namespace FRAMEDRAG.Engine.Display
 
         public Vector2 Position = new Vector2();
         public Vector2 Scale = new Vector2(1, 1);
+        public Vector2 AbsoluteScale()
+        {
+            return Scale * (Parent?.AbsoluteScale() ?? Vector2.One);
+        }
         public Vector2 Pivot = new Vector2(0, 0);
         public float Rotation = 0;
         public float RotationCache = 0;
@@ -52,13 +56,13 @@ namespace FRAMEDRAG.Engine.Display
         public Vector2 GlobalPosition()
         {
             if (Parent != null)
-                return Parent.GlobalPosition() + Position;
-            return Position;
+                return (Parent.GlobalPosition() + Position) * AbsoluteScale();
+            return Position * AbsoluteScale();
         }
 
         public Vector2 GlobalToLocal(Vector2 pos)
         {
-            return pos - GlobalPosition();
+            return (pos - GlobalPosition()) / AbsoluteScale();
         }
         /*private Graphics mask;
         public Graphics Mask

@@ -62,8 +62,18 @@ namespace FRAMEDRAG.Engine
                 instance.ResourceName = @"left_ptr";
             }
             instance.ResourceFullPath = $@"FRAMEDRAG.Engine.BuiltinAssets.cursor.{instance.ResourceName}.png";
-            var res = Assembly.GetAssembly(typeof(EngineCursor)).GetManifestResourceStream(instance.ResourceFullPath);
-            
+            Stream? res = Assembly.GetAssembly(typeof(EngineCursor)).GetManifestResourceStream(instance.ResourceFullPath);
+            if (res == null)
+            {
+                instance.ResourceFullPath = $@"FRAMEDRAG.Engine.DX.BuiltinAssets.cursor.{instance.ResourceName}.png";
+                res = Assembly.GetAssembly(typeof(EngineCursor)).GetManifestResourceStream(instance.ResourceFullPath);
+            }
+            if (res == null)
+            {
+                instance.ResourceFullPath = $@"FRAMEDRAG.Engine.GL.BuiltinAssets.cursor.{instance.ResourceName}.png";
+                res = Assembly.GetAssembly(typeof(EngineCursor)).GetManifestResourceStream(instance.ResourceFullPath);
+            }
+
             var texture = new Textures.Texture(Texture2D.FromStream(engine.GraphicsDevice, res));
             instance.Sprite = new Sprite(texture);
 

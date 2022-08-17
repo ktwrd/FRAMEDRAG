@@ -33,6 +33,8 @@ namespace FRAMEDRAG.Engine
 
             BackgroundTexture = ResourceMan.GetTexture(@"Engine.BuiltinAssets.graygrid");
         }
+        public new void UpdateWindowSize() => base.UpdateWindowSize(VirtualWidth, VirtualHeight, false);
+        public new void UpdateWindowSize(int width, int height, bool updateWindowSize = true) => base.UpdateWindowSize(width, height, false);
         private RenderTarget2D scene;
         protected override void Draw(GameTime gameTime)
         {

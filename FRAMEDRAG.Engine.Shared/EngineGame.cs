@@ -113,10 +113,12 @@ namespace FRAMEDRAG.Engine
         {
             UpdateWindowSize(VirtualWidth, VirtualHeight);
         }
-        public void UpdateWindowSize(int width, int height)
+        public void UpdateWindowSize(int width, int height, bool updateWindowSize=true)
         {
             VirtualWidth = width;
             VirtualHeight = height;
+            if (updateWindowSize)
+                RestoreWindowSize();
         }
         public void RestoreWindowSize()
         {
@@ -130,7 +132,14 @@ namespace FRAMEDRAG.Engine
         public ResourceManager ResourceMan;
         protected override void LoadContent()
         {
-            byte[]? fontstream = GeneralHelper.StreamToByteArray(Assembly.GetAssembly(typeof(EngineCursor)).GetManifestResourceStream(@"FRAMEDRAG.Engine.BuiltinAssets.font.ttf"));
+            var asm = Assembly.GetAssembly(typeof(EngineCursor));
+            var res = asm.GetManifestResourceNames();
+            var targetStream = asm.GetManifestResourceStream("FRAMEDRAG.Engine.BuiltinAssets.font.ttf");
+            if (targetStream == null)
+                targetStream = asm.GetManifestResourceStream("FRAMEDRAG.Engine.DX.BuiltinAssets.font.ttf");
+            if (targetStream == null)
+                targetStream = asm.GetManifestResourceStream("FRAMEDRAG.Engine.GL.BuiltinAssets.font.ttf");
+            byte[]? fontstream = GeneralHelper.StreamToByteArray(targetStream);
             if (fontstream != null)
             {
                 var baked = TtfFontBaker.Bake(
