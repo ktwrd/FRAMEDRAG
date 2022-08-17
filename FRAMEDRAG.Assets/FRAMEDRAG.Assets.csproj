@@ -1,0 +1,167 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="BuiltinAssets\cursor\based_arrow_down.png" />
+    <None Remove="BuiltinAssets\cursor\based_arrow_up.png" />
+    <None Remove="BuiltinAssets\cursor\bottom_left_corner.png" />
+    <None Remove="BuiltinAssets\cursor\bottom_right_corner.png" />
+    <None Remove="BuiltinAssets\cursor\cell.png" />
+    <None Remove="BuiltinAssets\cursor\context-menu.png" />
+    <None Remove="BuiltinAssets\cursor\crossed_circle.png" />
+    <None Remove="BuiltinAssets\cursor\dotbox.png" />
+    <None Remove="BuiltinAssets\cursor\fleur.png" />
+    <None Remove="BuiltinAssets\cursor\grabbing.png" />
+    <None Remove="BuiltinAssets\cursor\hand2.png" />
+    <None Remove="BuiltinAssets\cursor\left_ptr.png" />
+    <None Remove="BuiltinAssets\cursor\pencil.png" />
+    <None Remove="BuiltinAssets\cursor\plus.png" />
+    <None Remove="BuiltinAssets\cursor\question_arrow.png" />
+    <None Remove="BuiltinAssets\cursor\right_ptr.png" />
+    <None Remove="BuiltinAssets\cursor\sb_down_arrow.png" />
+    <None Remove="BuiltinAssets\cursor\sb_h_double_arrow.png" />
+    <None Remove="BuiltinAssets\cursor\sb_left_arrow.png" />
+    <None Remove="BuiltinAssets\cursor\sb_right_arrow.png" />
+    <None Remove="BuiltinAssets\cursor\sb_up_arrow.png" />
+    <None Remove="BuiltinAssets\cursor\sb_v_double_arrow.png" />
+    <None Remove="BuiltinAssets\cursor\sizing.png" />
+    <None Remove="BuiltinAssets\cursor\top_left_corner.png" />
+    <None Remove="BuiltinAssets\cursor\top_right_corner.png" />
+    <None Remove="BuiltinAssets\cursor\watch1.png" />
+    <None Remove="BuiltinAssets\cursor\watch2.png" />
+    <None Remove="BuiltinAssets\cursor\watch3.png" />
+    <None Remove="BuiltinAssets\cursor\watch4.png" />
+    <None Remove="BuiltinAssets\cursor\watch5.png" />
+    <None Remove="BuiltinAssets\cursor\watch6.png" />
+    <None Remove="BuiltinAssets\cursor\xterm.png" />
+    <None Remove="BuiltinAssets\cursor\X_cursor.png" />
+    <None Remove="BuiltinAssets\cursor\zoom-in.png" />
+    <None Remove="BuiltinAssets\cursor\zoom-out.png" />
+    <None Remove="BuiltinAssets\font.ttf" />
+    <None Remove="BuiltinAssets\graygrid.png" />
+    <None Remove="BuiltinAssets\logo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="BuiltinAssets\cursor\based_arrow_down.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\based_arrow_up.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\bottom_left_corner.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\bottom_right_corner.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\cell.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\context-menu.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\crossed_circle.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\dotbox.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\fleur.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\grabbing.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\hand2.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\left_ptr.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\pencil.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\plus.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\question_arrow.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\right_ptr.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\sb_down_arrow.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\sb_h_double_arrow.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\sb_left_arrow.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\sb_right_arrow.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\sb_up_arrow.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\sb_v_double_arrow.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\sizing.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\top_left_corner.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\top_right_corner.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\watch1.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\watch2.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\watch3.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\watch4.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\watch5.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\watch6.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\xterm.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\X_cursor.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\zoom-in.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\cursor\zoom-out.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets.cursor</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\font.ttf">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\graygrid.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets</CustomToolNamespace>
+    </Content>
+    <Content Include="BuiltinAssets\logo.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets</CustomToolNamespace>
+    </Content>
+  </ItemGroup>
+
+</Project>
