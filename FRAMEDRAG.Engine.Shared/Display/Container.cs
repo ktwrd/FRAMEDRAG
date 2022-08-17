@@ -110,7 +110,7 @@ namespace FRAMEDRAG.Engine.Display
         }
         public void RemoveChild()
         {
-            foreach (var c in Children)
+            foreach (var c in Children.ToArray())
                 RemoveChild(c);
         }
         public void RemoveChild(DisplayObject child)
@@ -203,7 +203,7 @@ namespace FRAMEDRAG.Engine.Display
             if (!Visible)
                 return;
             base.UpdateTransform();
-            foreach (var child in Children)
+            foreach (var child in Children.ToArray())
             {
                 child.UpdateTransform();
             }

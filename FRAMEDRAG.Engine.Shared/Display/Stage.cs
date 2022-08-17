@@ -60,7 +60,7 @@ namespace FRAMEDRAG.Engine.Display
         public override void Draw(SpriteBatch spriteBatch, EngineGame engine)
         {
             spriteBatch.Begin(SpriteSortMode.BackToFront);
-            foreach (var child in Children)
+            foreach (var child in Children.ToArray())
                 child.Draw(spriteBatch, engine);
             spriteBatch.End();
         }
