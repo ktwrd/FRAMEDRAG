@@ -22,7 +22,6 @@ namespace FRAMEDRAG.Engine
         Fit,
         Single
     }
-    public delegate void MouseDelegate(Vector2 position, MouseButton button);
     public class EngineGame : Game
     {
         public SpriteFont DefaultFont;
@@ -30,8 +29,15 @@ namespace FRAMEDRAG.Engine
         public GraphicsDeviceManager graphicsDevice;
         public SpriteBatch spriteBatch;
 
-        public double FixedUpdateTime = 1f / 15f;
-        public double FixedFastUpdateTime = 1f / 500f;
+
+        /// <summary>
+        /// Time in milliseconds for the frametime of 30fps
+        /// </summary>
+        public double FixedUpdateTime = 1f / 30f;
+        /// <summary>
+        /// Time in milliseconds for the frametime of 1000fps
+        /// </summary>
+        public double FixedFastUpdateTime = 1f / 1000f;
 
         public int TargetFramerate = 5000;
         public float MouseSensitivity = 6f;
@@ -39,7 +45,7 @@ namespace FRAMEDRAG.Engine
         public ConsoleComponent qConsole;
         public DConsole _console;
 
-        public Dictionary<string, Texture2D> TextureCache;
+        public Dictionary<string, Texture2D> TextureCache = new();
 
         public Stage Stage;
 
@@ -49,8 +55,48 @@ namespace FRAMEDRAG.Engine
         public InteractionManager Interaction;
         internal OnScreenDisplay DebugOverlay;
 
+        #region Events
         public event MouseDelegate MouseDownEvent;
         public event MouseDelegate MouseUpEvent;
+
+        public event CompareDelegate<Vector2, Vector2> WindowResize;
+        public event CompareDelegate<Vector2, Vector2> InnerWindowResize;
+        #endregion
+
+        #region Window Resize
+        public Vector2 WindowBoundsOffset = new Vector2();
+
+        public Vector2 WindowSize = Vector2.Zero;
+        public Vector2 InnerWindowSize => new Vector2(
+            Window.ClientBounds.Width + WindowBoundsOffset.X,
+            Window.ClientBounds.Height + WindowBoundsOffset.Y);
+        public Vector2 InnerWindowSizePrevious = Vector2.Zero;
+        public Vector2 WindowSizePrevious = Vector2.Zero;
+        private void Window_ClientSizeChanged(object? sender, EventArgs e)
+        {
+            WindowSize = new Vector2(
+                Window.ClientBounds.Width,
+                Window.ClientBounds.Height);
+            WindowResize?.Invoke(WindowSize, WindowSizePrevious);
+            InnerWindowResize?.Invoke(InnerWindowSize, InnerWindowSizePrevious);
+            WindowSizePrevious = WindowSize;
+            InnerWindowSizePrevious = InnerWindowSize;
+        }
+
+        public event CompareDelegate<bool, bool> AllowWindowResizeChange;
+        public bool AllowWindowResize
+        {
+            get
+            {
+                return Window.AllowUserResizing;
+            }
+            set
+            {
+                AllowWindowResizeChange?.Invoke(value, Window.AllowUserResizing);
+                Window.AllowUserResizing = value;
+            }
+        }
+        #endregion
 
         protected virtual void OnMouseDown(Vector2 position, MouseButton button) => MouseDownEvent?.Invoke(position, button);
         protected virtual void OnMouseUp(Vector2 position, MouseButton button) => MouseUpEvent?.Invoke(position, button);
@@ -58,7 +104,6 @@ namespace FRAMEDRAG.Engine
         public EngineGame()
         {
             Attributes = new EngineGameAttributes(this);
-            TextureCache = new Dictionary<string, Texture2D>();
 
             graphicsDevice = new GraphicsDeviceManager(this);
 
@@ -68,10 +113,16 @@ namespace FRAMEDRAG.Engine
             };
             Components.Add(qConsole);
             _console = new DConsole(this);
+
+            Window.ClientSizeChanged += Window_ClientSizeChanged;
+            WindowBoundsOffset = new Vector2(
+                Window.ClientBounds.Width - graphicsDevice.PreferredBackBufferWidth,
+                Window.ClientBounds.Height - graphicsDevice.PreferredBackBufferHeight);
+            Window_ClientSizeChanged(null, new EventArgs());
         }
 
-        public int VirtualWidth = 800;
-        public int VirtualHeight = 450;
+        public int VirtualWidth = 854;
+        public int VirtualHeight = 480;
 
         public void LoadImage(string location)
         {
