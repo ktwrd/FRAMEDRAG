@@ -21,6 +21,8 @@ namespace FRAMEDRAG.Engine
         public new EngineGame Game;
         public virtual void Draw(GameTime gameTime)
         { }
+        public new virtual void Update(GameTime gameTime)
+        { base.Update(gameTime); }
         public virtual void FixedUpdate(GameTime gameTime)
         { }
         public virtual void FixedFastUpdate(GameTime gameTime)
