@@ -6,7 +6,7 @@
     <SharedGUID>0d394f80-e812-4f06-9559-a5475194bbfa</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>FRAMEDRAG.Engine.Shared</Import_RootNamespace>
+    <Import_RootNamespace>FRAMEDRAG.Engine</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\based_arrow_down.png" />
@@ -75,6 +75,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Engine\obj\Debug\net6.0\Engine.AssemblyInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Engine\obj\Debug\net6.0\Engine.GlobalUsings.g.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GlobalEngine.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\Delegates.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\GeneralHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)InteractionManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Loaders\AnimatedGIF.cs" />
@@ -86,6 +87,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)StatsOverlay.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Text.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Textures\Texture.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewportContainer.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewportEngineGame.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)Engine\bin\Debug\net6.0\Engine.dll" />
