@@ -15,7 +15,7 @@ namespace FRAMEDRAG.Engine
         {
             this.engine = engine;
         }
-        public int showfps = 0;
+        public int showfps = 1;
         public int debugtxt = 0;
         public Color framebuffercolor = Color.Black;
         public int fpsmax
