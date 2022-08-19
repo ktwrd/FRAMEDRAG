@@ -42,7 +42,7 @@ namespace FRAMEDRAG.Engine.Display
         }
         public FRectangle BoundsRect;
         public Bounds Bounds;
-        public virtual FRectangle GetBounds(bool? skipUpdate, FRectangle? rect)
+        public virtual FRectangle GetBounds(bool skipUpdate=false, FRectangle rect = null)
         {
             UpdateBounds();
             if (rect == null)
