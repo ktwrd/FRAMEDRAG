@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
 	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Nullable>enable</Nullable>
+    <Configurations>Debug;Release;Debug - Library;Debug - Launcher;Debug - Server</Configurations>
   </PropertyGroup>
 
   <ItemGroup>

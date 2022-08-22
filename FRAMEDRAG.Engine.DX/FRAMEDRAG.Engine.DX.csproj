@@ -5,6 +5,7 @@
 	  <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Nullable>enable</Nullable>
     <OutputType>Library</OutputType>
+    <Configurations>Debug;Release;Debug - Library;Debug - Launcher;Debug - Server</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
