@@ -86,6 +86,7 @@ namespace FRAMEDRAG.Engine
             {
                 string line = lines[i];
                 var pos = GlobalPosition() + offset;
+                var scale = AbsoluteScale();
                 spriteBatch.DrawString(
                     engine.DefaultFont,
                     line,
@@ -93,7 +94,7 @@ namespace FRAMEDRAG.Engine
                     FontColor,
                     0f,
                     Vector2.Zero,
-                    1f,
+                    (scale.X + scale.Y) / 2f,
                     SpriteEffects.None,
                     Convert.ToSingle(1 - (ZIndex / int.MaxValue)));
                 offset += new Vector2(0, lineHeight[i]);
