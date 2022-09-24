@@ -9,49 +9,120 @@
     <Import_RootNamespace>FRAMEDRAG.Engine</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\based_arrow_down.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\based_arrow_up.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\bottom_left_corner.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\bottom_right_corner.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\cell.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\context-menu.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\crossed_circle.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\dotbox.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\fleur.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\grabbing.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\hand2.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\left_ptr.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\pencil.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\plus.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\question_arrow.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\right_ptr.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\sb_down_arrow.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\sb_h_double_arrow.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\sb_left_arrow.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\sb_right_arrow.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\sb_up_arrow.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\sb_v_double_arrow.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\sizing.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\top_left_corner.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\top_right_corner.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\watch1.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\watch2.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\watch3.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\watch4.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\watch5.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\watch6.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\xterm.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\X_cursor.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\zoom-in.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\zoom-out.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\font.ttf" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\graygrid.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\logo.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Engine\bin\Debug\net6.0\Engine.deps.json" />
-    <Content Include="$(MSBuildThisFileDirectory)Engine\bin\Debug\net6.0\Engine.runtimeconfig.json" />
-    <Content Include="$(MSBuildThisFileDirectory)Engine\obj\Debug\net6.0\Engine.csproj.FileListAbsolute.txt" />
-    <Content Include="$(MSBuildThisFileDirectory)Engine\obj\Engine.csproj.nuget.dgspec.json" />
-    <Content Include="$(MSBuildThisFileDirectory)Engine\obj\project.assets.json" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\based_arrow_down.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\based_arrow_up.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\bottom_left_corner.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\bottom_right_corner.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\cell.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\context-menu.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\crossed_circle.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\dotbox.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\fleur.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\grabbing.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\hand2.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\left_ptr.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\pencil.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\plus.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\question_arrow.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\right_ptr.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\sb_down_arrow.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\sb_h_double_arrow.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\sb_left_arrow.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\sb_right_arrow.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\sb_up_arrow.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\sb_v_double_arrow.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\sizing.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\top_left_corner.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\top_right_corner.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\watch1.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\watch2.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\watch3.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\watch4.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\watch5.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\watch6.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\xterm.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\X_cursor.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\zoom-in.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\cursor\zoom-out.png">
+      <Generator>FRAMEDRAG.Engine.BuiltinAssets</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\font.ttf">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\graygrid.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)BuiltinAssets\logo.png">
+      <CustomToolNamespace>FRAMEDRAG.Engine.BuiltinAssets</CustomToolNamespace>
+    </EmbeddedResource>
     <Content Include="$(MSBuildThisFileDirectory)framedrag-icon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Icon.bmp" />
     <Content Include="$(MSBuildThisFileDirectory)Icon.ico" />
@@ -71,9 +142,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Display\Stage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EngineGame.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EngineGameAttributes.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Engine\obj\Debug\net6.0\.NETCoreApp,Version=v6.0.AssemblyAttributes.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Engine\obj\Debug\net6.0\Engine.AssemblyInfo.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Engine\obj\Debug\net6.0\Engine.GlobalUsings.g.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GlobalEngine.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Delegates.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\GeneralHelper.cs" />
@@ -91,39 +159,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewportEngineGame.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)Engine\bin\Debug\net6.0\Engine.dll" />
-    <None Include="$(MSBuildThisFileDirectory)Engine\bin\Debug\net6.0\Engine.exe" />
-    <None Include="$(MSBuildThisFileDirectory)Engine\bin\Debug\net6.0\Engine.pdb" />
-    <None Include="$(MSBuildThisFileDirectory)Engine\bin\Debug\net6.0\MonoGame.Framework.dll" />
-    <None Include="$(MSBuildThisFileDirectory)Engine\bin\Debug\net6.0\runtimes\linux-x64\native\libopenal.so.1" />
-    <None Include="$(MSBuildThisFileDirectory)Engine\bin\Debug\net6.0\runtimes\linux-x64\native\libSDL2-2.0.so.0" />
-    <None Include="$(MSBuildThisFileDirectory)Engine\bin\Debug\net6.0\runtimes\osx\native\libopenal.1.dylib" />
-    <None Include="$(MSBuildThisFileDirectory)Engine\bin\Debug\net6.0\runtimes\osx\native\libSDL2-2.0.0.dylib" />
-    <None Include="$(MSBuildThisFileDirectory)Engine\bin\Debug\net6.0\runtimes\win-x64\native\SDL2.dll" />
-    <None Include="$(MSBuildThisFileDirectory)Engine\bin\Debug\net6.0\runtimes\win-x64\native\soft_oal.dll" />
-    <None Include="$(MSBuildThisFileDirectory)Engine\bin\Debug\net6.0\runtimes\win-x86\native\SDL2.dll" />
-    <None Include="$(MSBuildThisFileDirectory)Engine\bin\Debug\net6.0\runtimes\win-x86\native\soft_oal.dll" />
-    <None Include="$(MSBuildThisFileDirectory)Engine\obj\Debug\net6.0\apphost.exe" />
-    <None Include="$(MSBuildThisFileDirectory)Engine\obj\Debug\net6.0\Engine.AssemblyInfoInputs.cache" />
-    <None Include="$(MSBuildThisFileDirectory)Engine\obj\Debug\net6.0\Engine.assets.cache" />
-    <None Include="$(MSBuildThisFileDirectory)Engine\obj\Debug\net6.0\Engine.csproj.AssemblyReference.cache" />
-    <None Include="$(MSBuildThisFileDirectory)Engine\obj\Debug\net6.0\Engine.csproj.BuildWithSkipAnalyzers" />
-    <None Include="$(MSBuildThisFileDirectory)Engine\obj\Debug\net6.0\Engine.csproj.CopyComplete" />
-    <None Include="$(MSBuildThisFileDirectory)Engine\obj\Debug\net6.0\Engine.csproj.CoreCompileInputs.cache" />
-    <None Include="$(MSBuildThisFileDirectory)Engine\obj\Debug\net6.0\Engine.dll" />
-    <None Include="$(MSBuildThisFileDirectory)Engine\obj\Debug\net6.0\Engine.GeneratedMSBuildEditorConfig.editorconfig" />
-    <None Include="$(MSBuildThisFileDirectory)Engine\obj\Debug\net6.0\Engine.genruntimeconfig.cache" />
-    <None Include="$(MSBuildThisFileDirectory)Engine\obj\Debug\net6.0\Engine.pdb" />
-    <None Include="$(MSBuildThisFileDirectory)Engine\obj\Debug\net6.0\refint\Engine.dll" />
-    <None Include="$(MSBuildThisFileDirectory)Engine\obj\Debug\net6.0\ref\Engine.dll" />
-    <None Include="$(MSBuildThisFileDirectory)Engine\obj\Engine.csproj.nuget.g.props" />
-    <None Include="$(MSBuildThisFileDirectory)Engine\obj\Engine.csproj.nuget.g.targets" />
-    <None Include="$(MSBuildThisFileDirectory)Engine\obj\project.nuget.cache" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Properties\Resources.resx" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Engine\Core\" />
   </ItemGroup>
 </Project>
