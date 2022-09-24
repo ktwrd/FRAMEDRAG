@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace FRAMEDRAG.Engine
@@ -32,10 +33,17 @@ namespace FRAMEDRAG.Engine
             // Sort the resources
             foreach (var name in dirtyResourceNames)
             {
-                var cleanName = name.Replace(@"FRAMEDRAG.Engine.", @"Engine.");
-                var splitArr = cleanName.Split(@".");
-                cleanName = String.Join(@".", splitArr.SkipLast(1).ToArray());
-                var extension = splitArr[splitArr.Length - 1].ToLower();
+                var enginePrefixRegex = new Regex(@"^FRAMEDRAG\.Engine\.(GL|DX|Shared)\.(.*)\.([a-zA-Z0-9]+)$");
+                var otherRegex = new Regex(@"^(.*)\.([a-zA-Z0-9]+)$");
+                var matchedName = enginePrefixRegex.Match(name);
+                var otherMatch = otherRegex.Match(name);
+                var cleanName = otherMatch.Groups[1].Value;
+                var extension = otherMatch.Groups[2].Value;
+                if (matchedName.Success)
+                {
+                    cleanName = "Engine." + matchedName.Groups[2].Value;
+                    extension = matchedName.Groups[3].Value;
+                }
                 var stream = engineAssembly.GetManifestResourceStream(name);
                 if (stream == null)
                     continue;
