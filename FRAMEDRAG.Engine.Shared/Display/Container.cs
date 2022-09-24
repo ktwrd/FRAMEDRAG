@@ -217,33 +217,50 @@ namespace FRAMEDRAG.Engine.Display
                 child.Draw(spriteBatch, engine);
             }
             if (engine.Attributes.debugtxt > 0)
-                spriteBatch.DrawString(engine.DefaultFont, $"X:{pos.X}\nY:{pos.Y}\nE:{EntityID}", pos, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0f);
+                spriteBatch.DrawString(
+                    engine.DefaultFont,
+                    $"X:{pos.X}\nY:{pos.Y}\nE:{EntityID}",
+                    pos,
+                    Color.White,
+                    0f,
+                    Vector2.Zero,
+                    1f,
+                    SpriteEffects.None,
+                    ZIndex_Calculated);
         }
         #endregion
         protected bool IsCursorInteracting = false;
         private MouseState? previousMouseState = null;
+        public virtual bool InsideBounds(Vector2 position)
+        {
+            if (position.X > Bounds.minX)
+                if (position.X < Bounds.maxX)
+                    if (position.Y > Bounds.minY)
+                        if (position.Y < Bounds.maxY)
+                            return true;
+            return false;
+        }
         // TODO this really should be moved to the InteractionManager
         public virtual void InteractiveCheck(GameTime gameTime, MouseState mouse, KeyboardState keyboard)
         {
-            if (mouse.X > Bounds.minX && mouse.X < Bounds.maxX)
-                if (mouse.Y > Bounds.minY && mouse.Y < Bounds.maxY)
+            if (InsideBounds(mouse.Position.ToVector2()))
+            {
+                IsCursorInteracting = true;
+                if (mouse.LeftButton == ButtonState.Pressed || mouse.MiddleButton == ButtonState.Pressed || mouse.RightButton == ButtonState.Pressed)
+                    MouseDown(mouse, keyboard);
+                if (previousMouseState != null)
                 {
-                    IsCursorInteracting = true;
-                    if (mouse.LeftButton == ButtonState.Pressed || mouse.MiddleButton == ButtonState.Pressed || mouse.RightButton == ButtonState.Pressed)
-                        MouseDown(mouse, keyboard);
-                    if (previousMouseState != null)
-                    {
-                        if (mouse.LeftButton == ButtonState.Released && previousMouseState?.LeftButton == ButtonState.Pressed)
-                            MouseUp(MouseButton.Left, (MouseState)previousMouseState, mouse);
-                        if (mouse.RightButton == ButtonState.Released && previousMouseState?.RightButton == ButtonState.Pressed)
-                            MouseUp(MouseButton.Right, (MouseState)previousMouseState, mouse);
-                        if (mouse.MiddleButton == ButtonState.Released && previousMouseState?.MiddleButton == ButtonState.Pressed)
-                            MouseUp(MouseButton.Middle, (MouseState)previousMouseState, mouse);
-                    }
-                    MouseHover(mouse, keyboard);
-                    previousMouseState = mouse;
-                    return;
+                    if (mouse.LeftButton == ButtonState.Released && previousMouseState?.LeftButton == ButtonState.Pressed)
+                        MouseUp(MouseButton.Left, (MouseState)previousMouseState, mouse);
+                    if (mouse.RightButton == ButtonState.Released && previousMouseState?.RightButton == ButtonState.Pressed)
+                        MouseUp(MouseButton.Right, (MouseState)previousMouseState, mouse);
+                    if (mouse.MiddleButton == ButtonState.Released && previousMouseState?.MiddleButton == ButtonState.Pressed)
+                        MouseUp(MouseButton.Middle, (MouseState)previousMouseState, mouse);
                 }
+                MouseHover(mouse, keyboard);
+                previousMouseState = mouse;
+                return;
+            }
             IsCursorInteracting = false;
         }
 
