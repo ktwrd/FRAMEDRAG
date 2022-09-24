@@ -15,19 +15,20 @@ namespace FRAMEDRAG.DVDExample
     {
         public DVDSprite(Texture texture) : base(texture)
         {
+            Origin = Vector2.Zero;
         }
 
         private Vector2 change = new Vector2(1f, 1f);
         public override void Update(GameTime gameTime, EngineGame engine)
         {
-            if (Position.X <= 1)
+            if (Position.X <= 0)
                 change.X = 1f;
-            else if (Position.X + Width >= engine.VirtualWidth)
+            else if (Position.X >= engine.InnerWindowSize.X)
                 change.X = -1f;
 
-            if (Position.Y <= 1)
+            if (Position.Y <= 0)
                 change.Y = 1f;
-            else if (Position.Y + Height >= engine.VirtualHeight)
+            else if (Position.Y >= engine.InnerWindowSize.Y)
                 change.Y = -1f;
 
             Position += change;

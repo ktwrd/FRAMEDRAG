@@ -40,7 +40,7 @@ namespace FRAMEDRAG.DVDExample
 
             countText = new Text($@"Count: {spritecount}", DefaultFont);
             countText.Position.X = 300;
-            countText.ZIndex = int.MaxValue;
+            countText.ZIndex = DisplayObject.ZIndex_Max;
             Stage.AddChild(countText);
         }
         private Text countText;
@@ -48,7 +48,7 @@ namespace FRAMEDRAG.DVDExample
         private int currentTextureIndex = 0;
         private void AddSpriteThing()
         {
-            var testTexture = new Texture(ResourceMan.GetTexture(@"Engine.BuiltinAssets.logo"));
+            var testTexture = new Texture(ResourceMan.GetTexture(@"Engine.BuiltinAssets.graygrid"));
             var testSprite = new DVDSprite(testTexture);
             testSprite.Scale.X = 200f / testTexture.Width;
             testSprite.Scale.Y = 200f / testTexture.Height;
