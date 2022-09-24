@@ -92,11 +92,11 @@ namespace FRAMEDRAG.Engine
                     line,
                     pos,
                     FontColor,
-                    0f,
-                    Vector2.Zero,
+                    Rotation,
+                    Origin,
                     (scale.X + scale.Y) / 2f,
                     SpriteEffects.None,
-                    Convert.ToSingle(1 - (ZIndex / int.MaxValue)));
+                    ZIndex_Calculated);
                 offset += new Vector2(0, lineHeight[i]);
             }
         }

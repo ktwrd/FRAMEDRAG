@@ -85,10 +85,10 @@ namespace FRAMEDRAG.Engine.Display
                 rect,
                 null,
                 Color.White,
-                0f,
-                Vector2.Zero,
+                Rotation,
+                Origin,
                 SpriteEffects.None,
-                Convert.ToSingle(1 - (ZIndex / int.MaxValue)));
+                ZIndex_Calculated);
         }
     }
 }

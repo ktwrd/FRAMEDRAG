@@ -14,6 +14,7 @@ namespace FRAMEDRAG.Engine.Display
         {
             Engine = engine;
             HitArea = new Rectangle(new Point(0, 0), new Point(100000, 100000));
+            ZIndex = 0;
         }
         public EngineGame Engine;
 
@@ -59,7 +60,7 @@ namespace FRAMEDRAG.Engine.Display
         }
         public override void Draw(SpriteBatch spriteBatch, EngineGame engine)
         {
-            spriteBatch.Begin(SpriteSortMode.BackToFront);
+            spriteBatch.Begin(SpriteSortMode.FrontToBack);
             foreach (var child in Children.ToArray())
                 child.Draw(spriteBatch, engine);
             spriteBatch.End();

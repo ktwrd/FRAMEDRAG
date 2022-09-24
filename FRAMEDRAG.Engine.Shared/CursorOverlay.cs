@@ -90,6 +90,7 @@ namespace FRAMEDRAG.Engine
             SetCursor(EngineCursor.Generate(CursorType.Pointer, engine));
             targetStage = targetParent;
             targetStage.AddChild(container);
+            container.ZIndex = DisplayObject.ZIndex_Max - 1;
         }
         private Stage targetStage;
 

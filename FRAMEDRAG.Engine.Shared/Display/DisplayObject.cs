@@ -27,6 +27,7 @@ namespace FRAMEDRAG.Engine.Display
             return Scale * (Parent?.AbsoluteScale() ?? Vector2.One);
         }
         public Vector2 Pivot = new Vector2(0, 0);
+        public Vector2 Origin = Vector2.Zero;
         public float Rotation = 0;
         public float RotationCache = 0;
         public float Alpha = 1;
@@ -40,7 +41,22 @@ namespace FRAMEDRAG.Engine.Display
         public Stage Stage;
         public float WorldAlpha = 1;
         public bool _interactive = false;
-        public int ZIndex = 0;
+        private int? _zIndex = null;
+        public int ZIndex
+        {
+            get
+            {
+                if (Parent != null && _zIndex == null)
+                    return Parent.ZIndex ;
+                return _zIndex ?? 0;
+            }
+            set
+            {
+                _zIndex = value;
+            }
+        }
+        public const int ZIndex_Max = 1048576;
+        public float ZIndex_Calculated => Math.Max(0f, Math.Min(1f, ZIndex / ZIndex_Max));
         public bool Interactive
         {
             get
