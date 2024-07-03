@@ -3,6 +3,7 @@ using FRAMEDRAG.Engine.Helpers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using NLog;
 using QuakeConsole;
 using SpriteFontPlus;
 using System;
@@ -28,6 +29,7 @@ namespace FRAMEDRAG.Engine
 
         public GraphicsDeviceManager graphicsDevice;
         public SpriteBatch spriteBatch;
+        private readonly Logger _log = LogManager.GetCurrentClassLogger();
 
 
         /// <summary>
@@ -38,6 +40,25 @@ namespace FRAMEDRAG.Engine
         /// Time in milliseconds for the frametime of 1000fps
         /// </summary>
         public double FixedFastUpdateTime = 1f / 1000f;
+        /// <summary>
+        /// Set the framerate (how may frames should be rendered in a second)
+        /// </summary>
+        public void SetFPS(double target)
+        {
+            SetFrametime(1f / target);
+        }
+        /// <summary>
+        /// Set the frametime (how many milliseconds per frame)
+        /// </summary>
+        public void SetFrametime(double target)
+        {
+            FixedUpdateTime = target;
+            FrametimeUpdated?.Invoke(this, new());
+        }
+        /// <summary>
+        /// Invoked when <see cref="SetFrametime(double)"/> was called.
+        /// </summary>
+        public event EventHandler? FrametimeUpdated;
 
         public int TargetFramerate = 5000;
         public float MouseSensitivity = 6f;
@@ -152,12 +173,19 @@ namespace FRAMEDRAG.Engine
             Stage = new Stage(this);
 
             Window.AllowUserResizing = true;
-
             base.Initialize();
         }
 
         public Vector2 EngineCursorPosition { get; private set; }
+        /// <summary>
+        /// Invoked when <see cref="EngineCursorPosition"/> was changed.
+        /// </summary>
+        public EventHandler<Vector2>? EngineCursorPositionChanged;
         public Vector2 WindowCursorPosition { get; private set; }
+        /// <summary>
+        /// Invoked when <see cref="WindowCursorPosition"/> was changed.
+        /// </summary>
+        public EventHandler<Vector2>? WindowCursorPositionChanged;
 
         #region Window Size
         public void UpdateWindowSize()
@@ -181,6 +209,7 @@ namespace FRAMEDRAG.Engine
         protected virtual Stage TargetCursorStage() => this.Stage;
         public Stage GetTargetCursorStage() => TargetCursorStage();
         public ResourceManager ResourceMan;
+        protected bool IncludeCursorOverlay { get; set; }
         protected override void LoadContent()
         {
             var asm = Assembly.GetAssembly(typeof(EngineCursor));
@@ -205,7 +234,14 @@ namespace FRAMEDRAG.Engine
             ResourceMan = new ResourceManager(this);
 
             /*Components.Add(new CursorOverlay(this, Stage));*/
-            Components.Add(new CursorOverlay(this, TargetCursorStage()));
+            if (IncludeCursorOverlay)
+            {
+                Components.Add(new CursorOverlay(this, TargetCursorStage()));
+            }
+            else
+            {
+                _log.Debug($"Didn't include {nameof(CursorOverlay)} since {nameof(IncludeCursorOverlay)} is false.");
+            }
             Components.Add(new StatsOverlay(this));
             Interaction = new InteractionManager(this);
             Components.Add(Interaction);
@@ -251,8 +287,9 @@ namespace FRAMEDRAG.Engine
             return screenLocation * scaledStageScreenSize;
         }
 
-        public Vector2 ScaledMousePosition = Vector2.Zero;
-        public Vector2 ScaledMousePositionPrevious = Vector2.Zero;
+        public Vector2 ScaledMousePosition { get; private set; } = Vector2.Zero;
+        public Vector2 ScaledMousePositionPrevious { get; private set; } = Vector2.Zero;
+        public EventHandler<Vector2>? ScaledMousePositionChanged;
 
         protected KeyboardState? previousKeyboard = null;
         protected MouseState? previousMouse = null;
@@ -262,7 +299,6 @@ namespace FRAMEDRAG.Engine
         {
             GraphicsDevice.Clear(Color.Black);
             Stage.Draw(spriteBatch, this);
-
 
             base.Draw(gameTime);
         }
@@ -291,6 +327,9 @@ namespace FRAMEDRAG.Engine
                 }
             }
 
+            ScaledMousePosition = new Vector2(mouse.Position.X, mouse.Position.Y);
+            ScaledMousePositionPrevious = new Vector2(previousMouse?.Position.X ?? 0f, previousMouse?.Position.Y ?? 0f);
+            ScaledMousePositionChanged?.Invoke(this, ScaledMousePosition);
             if (mouse.LeftButton == ButtonState.Pressed)
             {
                 OnMouseDown(ScaledMousePosition, MouseButton.Left);
@@ -316,8 +355,6 @@ namespace FRAMEDRAG.Engine
             {
                 OnMouseUp(ScaledMousePosition, MouseButton.Right);
             }
-            ScaledMousePosition = new Vector2(mouse.Position.X, mouse.Position.Y);
-            ScaledMousePositionPrevious = new Vector2(previousMouse?.Position.X ?? 0f, previousMouse?.Position.Y ?? 0f);
 
 
             previousMouse = mouse;

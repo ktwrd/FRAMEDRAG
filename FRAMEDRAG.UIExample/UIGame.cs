@@ -12,8 +12,8 @@ namespace FRAMEDRAG.UIExample
         internal UIGame()
             : base()
         {
-            VirtualWidth = 1280;
-            VirtualHeight = 720;
+            VirtualWidth = 1600;
+            VirtualHeight = 900;
         }
     }
 }
